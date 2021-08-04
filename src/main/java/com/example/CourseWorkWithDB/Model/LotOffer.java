@@ -19,6 +19,13 @@ public class LotOffer {
         this.cost = cost;
     }
 
+    public LotOffer(long owner_id, long lot_id, int cost) {
+        this.owner_id = owner_id;
+        this.lot_id = lot_id;
+        this.description = description;
+        this.cost = cost;
+    }
+
     public LotOffer( String description, int cost) {
         this.description = description;
         this.cost = cost;

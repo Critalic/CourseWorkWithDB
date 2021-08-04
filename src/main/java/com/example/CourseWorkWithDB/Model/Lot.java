@@ -29,6 +29,7 @@ public class Lot {
         this.startPrice = startPrice;
     }
 
+
     public User getOwner() {
         return owner;
     }

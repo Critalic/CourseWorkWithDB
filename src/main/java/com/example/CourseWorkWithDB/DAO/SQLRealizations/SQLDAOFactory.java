@@ -14,8 +14,8 @@ public class SQLDAOFactory implements IDAOFactory {
     private SQLLotDAO lotDAO;
 
     public SQLDAOFactory(Connection connection) {
-        userDAO = new SQLUserDAO();
-        lotOfferDAO = new SQLLotOfferDAO();
+        userDAO = new SQLUserDAO(connection);
+        lotOfferDAO = new SQLLotOfferDAO(connection);
         lotDAO = new SQLLotDAO(connection);
     }
 

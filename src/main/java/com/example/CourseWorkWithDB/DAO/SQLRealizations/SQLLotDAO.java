@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLLotDAO implements ILotDAO {
-    private Connection connection;
+    private final Connection connection;
 
     public SQLLotDAO(Connection connection) {
         this.connection = connection;
@@ -175,14 +175,13 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     private Lot mapLot (ResultSet set) throws SQLException {
-        Lot lot = new Lot(
+        return new Lot(
                 set.getLong("id"),
                 set.getLong("customer_id"),
                 set.getString("description"),
                 set.getString("name"),
                 set.getInt("start_price"),
                 set.getBoolean("is_active"));
-        return lot;
     }
 
     private static class LotQueries {

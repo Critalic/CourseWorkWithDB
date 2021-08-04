@@ -1,9 +1,13 @@
 package com.example.CourseWorkWithDB.Controllers;
 
 import com.example.CourseWorkWithDB.DAO.SQLRealizations.SQLLotDAO;
+import com.example.CourseWorkWithDB.DAO.SQLRealizations.SQLLotOfferDAO;
+import com.example.CourseWorkWithDB.DAO.SQLRealizations.SQLUserDAO;
 import com.example.CourseWorkWithDB.Exceptions.DBError;
 import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.Lot;
+import com.example.CourseWorkWithDB.Model.LotOffer;
+import com.example.CourseWorkWithDB.Model.User;
 
 import java.io.*;
 import java.sql.Connection;
@@ -29,25 +33,26 @@ public class HelloServlet extends HttpServlet {
             DataSource dataSource = (DataSource) context.lookup("jdbc/mysql");
             System.out.println(dataSource.getClass().getName());
             connection = dataSource.getConnection();
-            SQLLotDAO sqlLotDAO = new SQLLotDAO(connection);
-            Lot l2 = new Lot("Coffee table", "A coffee table2", 240, 1);
-//            List<Lot> l = null;
-            sqlLotDAO.deleteLot(7);
-//            l = sqlLotDAO.getAllThatContain("coffe");
+            SQLLotOfferDAO sqlLotDAO = new SQLLotOfferDAO(connection);
+            LotOffer l2 = new LotOffer( 20, 6, 63 );
 
+            List<LotOffer> l = null;
+//            sqlLotDAO.addLotOfferWithoutDescription(l2);
+//            l = sqlLotDAO.getAllThatContain("coffe");
+            l = sqlLotDAO.getAllForLot(6);
 
             resp.setContentType("text/html");
             PrintWriter out = resp.getWriter();
             out.write("<h1>Hello World</h1>");
             out.write("<hr/>");
-//            for(Lot lot : l) {
-//                out.write("<p>" + lot.getName() + "</p>");
-//            }
+            for(LotOffer lot : l) {
+                out.write("<p>" + lot.getCost() + "</p>");
+            }
             out.close();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
-        } catch (DBError dbError) {
-            dbError.printStackTrace();
+        } catch (NoIDException e) {
+            e.printStackTrace();
         } finally {
             if (connection != null) {
                 try {

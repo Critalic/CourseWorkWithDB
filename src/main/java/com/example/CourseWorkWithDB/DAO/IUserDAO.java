@@ -8,6 +8,6 @@ import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.User;
 
 public interface IUserDAO {
-    User getUser(String login) throws NoIDException;
+    User getUser(long login) throws NoIDException;
     void createUser(User user) throws DBError, AlreadyExistsError, InvalidEmailException;
 }

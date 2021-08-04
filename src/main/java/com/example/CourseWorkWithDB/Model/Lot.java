@@ -22,11 +22,11 @@ public class Lot {
         this.startPrice = startPrice;
     }
 
-    public Lot(String description, String name, String startPrice, boolean isActive) {
+    public Lot(String name,String description , int startPrice, long ownerId) {
         this.description = description;
         this.name = name;
-        this.isActive = isActive;
-        this.startPrice = Integer.parseInt(startPrice);;
+        this.ownerId = ownerId;
+        this.startPrice = startPrice;
     }
 
     public User getOwner() {
@@ -49,7 +49,7 @@ public class Lot {
         return isActive;
     }
 
-    public double getStartPrice() {
+    public int getStartPrice() {
         return startPrice;
     }
 

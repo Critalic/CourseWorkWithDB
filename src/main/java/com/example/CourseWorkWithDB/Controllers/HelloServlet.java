@@ -1,12 +1,14 @@
 package com.example.CourseWorkWithDB.Controllers;
 
 import com.example.CourseWorkWithDB.DAO.SQLRealizations.SQLLotDAO;
+import com.example.CourseWorkWithDB.Exceptions.DBError;
 import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.Lot;
 
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -28,21 +30,24 @@ public class HelloServlet extends HttpServlet {
             System.out.println(dataSource.getClass().getName());
             connection = dataSource.getConnection();
             SQLLotDAO sqlLotDAO = new SQLLotDAO(connection);
-            Lot l = null;
-            try {
-                l = sqlLotDAO.get(4);
-            } catch (NoIDException e) {
-                e.printStackTrace();
-            }
+            Lot l2 = new Lot("Coffee table", "A coffee table2", 240, 1);
+//            List<Lot> l = null;
+            sqlLotDAO.deleteLot(7);
+//            l = sqlLotDAO.getAllThatContain("coffe");
+
 
             resp.setContentType("text/html");
             PrintWriter out = resp.getWriter();
             out.write("<h1>Hello World</h1>");
             out.write("<hr/>");
-            out.write("<p>" + l.getName() + "</p>");
+//            for(Lot lot : l) {
+//                out.write("<p>" + lot.getName() + "</p>");
+//            }
             out.close();
         } catch (NamingException | SQLException e) {
             e.printStackTrace();
+        } catch (DBError dbError) {
+            dbError.printStackTrace();
         } finally {
             if (connection != null) {
                 try {

@@ -19,10 +19,9 @@ public class LotOffer {
         this.cost = cost;
     }
 
-    public LotOffer(long owner_id, long lot_id, int cost) {
+    public LotOffer(int cost, long owner_id, long lot_id) {
         this.owner_id = owner_id;
         this.lot_id = lot_id;
-        this.description = description;
         this.cost = cost;
     }
 

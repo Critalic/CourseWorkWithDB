@@ -16,12 +16,12 @@ public class SQLUserDAO implements IUserDAO {
     }
 
     @Override
-    public User getUser(long userId) {
+    public User getUser(String userLogin) {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = connection.prepareStatement(UserQueries.getUserById);
-            statement.setLong(1, userId);
+            statement = connection.prepareStatement(UserQueries.getUserByLogin);
+            statement.setString(1, userLogin);
             resultSet = statement.executeQuery();
             resultSet.next();
             return mapUser(resultSet);
@@ -67,7 +67,7 @@ public class SQLUserDAO implements IUserDAO {
     }
 
     private static class UserQueries {
-        static String getUserById = "select * from customer where id = ?";
+        static String getUserByLogin = "select * from customer where email = ?";
         static String addUser = "insert into customer (username, email, password) values" +
                 " (?, ?, ?);";
     }

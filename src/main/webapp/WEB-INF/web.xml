@@ -21,5 +21,7 @@
         <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
     </resource-env-ref>
 
-
+<!--    <listener>-->
+<!--        <listener-class>com.example.CourseWorkWithDB.Controllers.InitListener</listener-class>-->
+<!--    </listener>-->
 </web-app>

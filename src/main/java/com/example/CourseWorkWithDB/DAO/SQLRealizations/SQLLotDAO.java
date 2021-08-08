@@ -181,7 +181,8 @@ public class SQLLotDAO implements ILotDAO {
                 set.getString("description"),
                 set.getString("name"),
                 set.getInt("start_price"),
-                set.getBoolean("is_active"));
+                set.getBoolean("is_active"),
+                set.getInt("offers"));
     }
 
     private static class LotQueries {

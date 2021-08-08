@@ -16,7 +16,7 @@ public class SQLUserDAO implements IUserDAO {
     }
 
     @Override
-    public User getUser(String userLogin) {
+    public User getUser(String userLogin) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
@@ -25,21 +25,15 @@ public class SQLUserDAO implements IUserDAO {
             resultSet = statement.executeQuery();
             resultSet.next();
             return mapUser(resultSet);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
-            try {
-                resultSet.close();
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert resultSet != null;
+            resultSet.close();
+            statement.close();
         }
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(UserQueries.addUser);
@@ -47,14 +41,9 @@ public class SQLUserDAO implements IUserDAO {
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPasswordHash());
             statement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         } finally {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert statement != null;
+            statement.close();
         }
     }
 

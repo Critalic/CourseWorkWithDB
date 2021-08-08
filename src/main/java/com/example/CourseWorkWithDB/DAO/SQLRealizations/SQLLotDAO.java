@@ -1,8 +1,6 @@
 package com.example.CourseWorkWithDB.DAO.SQLRealizations;
 
 import com.example.CourseWorkWithDB.DAO.ILotDAO;
-import com.example.CourseWorkWithDB.Exceptions.DBError;
-import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.Lot;
 
 import java.sql.*;
@@ -17,7 +15,7 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public Lot getLot(long id) throws NoIDException {
+    public Lot getLot(long id) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
@@ -26,11 +24,9 @@ public class SQLLotDAO implements ILotDAO {
             resultSet = statement.executeQuery();
             resultSet.next();
             return mapLot(resultSet);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
             try {
+                assert resultSet != null;
                 resultSet.close();
                 statement.close();
             } catch (SQLException throwables) {
@@ -40,7 +36,7 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public List<Lot> getAll() throws DBError {
+    public List<Lot> getAll() throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Lot> answer = new ArrayList<>();
@@ -50,11 +46,9 @@ public class SQLLotDAO implements ILotDAO {
             while(resultSet.next()) {
                 answer.add(mapLot(resultSet));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
             try {
+                assert resultSet != null;
                 resultSet.close();
                 statement.close();
             } catch (SQLException throwables) {
@@ -65,7 +59,7 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public List<Lot> getAllThatContain(String name) {
+    public List<Lot> getAllThatContain(String name) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Lot> answer = new ArrayList<>();
@@ -76,11 +70,9 @@ public class SQLLotDAO implements ILotDAO {
             while(resultSet.next()) {
                 answer.add(mapLot(resultSet));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
             try {
+                assert resultSet != null;
                 resultSet.close();
                 statement.close();
             } catch (SQLException throwables) {
@@ -91,7 +83,7 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public List<Lot> getAllWithOwner(long ownerId) {
+    public List<Lot> getAllWithOwner(long ownerId) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Lot> answer = new ArrayList<>();
@@ -102,11 +94,9 @@ public class SQLLotDAO implements ILotDAO {
             while(resultSet.next()) {
                 answer.add(mapLot(resultSet));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
             try {
+                assert resultSet != null;
                 resultSet.close();
                 statement.close();
             } catch (SQLException throwables) {
@@ -117,7 +107,7 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public void addLot(Lot lot) throws DBError {
+    public void addLot(Lot lot) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(LotQueries.addLot);
@@ -126,10 +116,9 @@ public class SQLLotDAO implements ILotDAO {
             statement.setInt(3, lot.getStartPrice());
             statement.setLong(4, lot.getOwnerId());
             statement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         } finally {
             try {
+                assert statement != null;
                 statement.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -138,39 +127,29 @@ public class SQLLotDAO implements ILotDAO {
     }
 
     @Override
-    public void updateStatus(long lotId, boolean value) throws NoIDException, DBError {
+    public void updateStatus(long lotId, boolean value) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(LotQueries.updateStatus);
             statement.setBoolean(1, value);
             statement.setLong(2, lotId);
             statement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         } finally {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert statement != null;
+            statement.close();
         }
     }
 
     @Override
-    public void deleteLot(long lotId) throws DBError {
+    public void deleteLot(long lotId) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(LotQueries.deleteLot);
             statement.setLong(1, lotId);
             statement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         } finally {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert statement != null;
+            statement.close();
         }
     }
 

@@ -9,9 +9,9 @@ import java.sql.Connection;
 
 public class SQLDAOFactory implements IDAOFactory {
 
-    private SQLUserDAO userDAO;
-    private SQLLotOfferDAO lotOfferDAO;
-    private SQLLotDAO lotDAO;
+    private final SQLUserDAO userDAO;
+    private final SQLLotOfferDAO lotOfferDAO;
+    private final SQLLotDAO lotDAO;
 
     public SQLDAOFactory(Connection connection) {
         userDAO = new SQLUserDAO(connection);

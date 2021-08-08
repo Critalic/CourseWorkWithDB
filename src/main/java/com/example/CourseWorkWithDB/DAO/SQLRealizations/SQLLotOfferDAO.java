@@ -1,7 +1,6 @@
 package com.example.CourseWorkWithDB.DAO.SQLRealizations;
 
 import com.example.CourseWorkWithDB.DAO.ILotOfferDAO;
-import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.LotOffer;
 
 import java.sql.Connection;
@@ -19,7 +18,7 @@ public class SQLLotOfferDAO implements ILotOfferDAO {
     }
 
     @Override
-    public void addLotOfferWithDescription(LotOffer offer) {
+    public void addLotOfferWithDescription(LotOffer offer) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(LotOfferQueries.addOfferWithDescription);
@@ -31,16 +30,13 @@ public class SQLLotOfferDAO implements ILotOfferDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert statement != null;
+            statement.close();
         }
     }
 
     @Override
-    public void addLotOfferWithoutDescription(LotOffer offer) {
+    public void addLotOfferWithoutDescription(LotOffer offer) throws SQLException {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(LotOfferQueries.addOfferWithoutDescription);
@@ -51,16 +47,13 @@ public class SQLLotOfferDAO implements ILotOfferDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            assert statement != null;
+            statement.close();
         }
     }
 
     @Override
-    public List<LotOffer> getAllForLot(long lotId) throws NoIDException {
+    public List<LotOffer> getAllForLot(long lotId) throws SQLException {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<LotOffer> answer = new ArrayList<>();
@@ -71,11 +64,9 @@ public class SQLLotOfferDAO implements ILotOfferDAO {
             while(resultSet.next()) {
                 answer.add(mapLotOffer(resultSet));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return null;
         } finally {
             try {
+                assert resultSet != null;
                 resultSet.close();
                 statement.close();
             } catch (SQLException throwables) {

@@ -31,8 +31,8 @@
                                     <tr>
                                         <td class="border border-green-600 ..."><c:out value="${lot.getName()}"/></td>
                                         <td class="border border-green-600 ..."><c:out value="${lot.getDescription()}"/></td>
-                                        <td class="border border-green-600 ..."><c:out value="${lot.getOffersQuantity}"/></td>
-                                        <td class="border border-green-600 ..."><c:out value="${lot.getPrice()} $"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getOffersQuantity()}"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getStartPrice()} $"/></td>
                                         <td class="border border-green-600 ..."><c:out value="${lot.isActive()}"/></td>
                                         <td class="border border-green-600 ...">
                                             <input type="radio" id="myCheckbox" name="lotID" value="${lot.getId()}"/>

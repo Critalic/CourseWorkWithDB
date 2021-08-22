@@ -14,7 +14,7 @@
                     <div class="divide-y divide-gray-200">
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                             <p><h1><b>Great!</p> <p>Please fill in the following fields</p></b></h1>
-                            <form action="${pageContext.request.contextPath}/lots/makeOfferWithoutDescription?lotId=${lotId}" method="post">
+                            <form action="${pageContext.request.contextPath}/lots/makeOffer?lotId=${lotId}" method="post">
                                 <ul class="list-disc space-y-2">
                                     <li> What's your bid (in $)?
                                         <div class="mb-3 pt-0">

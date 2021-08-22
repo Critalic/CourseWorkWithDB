@@ -1,6 +1,5 @@
 package com.example.CourseWorkWithDB.DAO;
 
-import com.example.CourseWorkWithDB.Exceptions.NoIDException;
 import com.example.CourseWorkWithDB.Model.Lot;
 
 import java.sql.SQLException;

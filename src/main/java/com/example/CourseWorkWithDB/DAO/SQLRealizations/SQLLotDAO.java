@@ -66,6 +66,7 @@ public class SQLLotDAO implements ILotDAO {
         try {
             statement = connection.prepareStatement(LotQueries.getAllThatContain);
             statement.setString(1, ("%" + name + "%"));
+            statement.setString(2, ("%" + name + "%"));
             resultSet = statement.executeQuery();
             while(resultSet.next()) {
                 answer.add(mapLot(resultSet));
@@ -168,7 +169,7 @@ public class SQLLotDAO implements ILotDAO {
         static String getLotByID = "select * from lot where id = ?";
         static String getAllLots = "select * from lot";
         static String getAllWithOwner = "select lot.* from lottery.lot inner join lottery.customer on lottery.lot.customer_id = lottery.customer.id where lot.customer_id =?;";
-        static String getAllThatContain = "select * from lottery.lot where name like ?;";
+        static String getAllThatContain = "select * from lottery.lot where name like ? || description like ?;";
         static String addLot = "insert into lot (name, description, start_price, customer_id) values" +
                 " (?, ?, ?, ?);";
         static String updateStatus = "update lot set is_active = ? where id = ?;";

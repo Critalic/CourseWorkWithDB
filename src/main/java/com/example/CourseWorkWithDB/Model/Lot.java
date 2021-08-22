@@ -6,9 +6,9 @@ import java.util.List;
 public class Lot {
     private long id;
     private long ownerId;
-    private String description;
-    private int startPrice;
-    private String name;
+    private final String description;
+    private final int startPrice;
+    private final String name;
     private boolean isActive;
     private Timestamp create_time;
     private User owner;

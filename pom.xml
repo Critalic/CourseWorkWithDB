@@ -69,6 +69,16 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.9.Final</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -79,5 +89,11 @@
                 <version>3.3.1</version>
             </plugin>
         </plugins>
+
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>F:\Real Intellij projects\CourseWorkWithDB\Java\src\main\webapp</directory>-->
+<!--            </resource>-->
+<!--        </resources>-->
     </build>
 </project>

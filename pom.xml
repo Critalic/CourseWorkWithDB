@@ -90,10 +90,10 @@
             </plugin>
         </plugins>
 
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>F:\Real Intellij projects\CourseWorkWithDB\Java\src\main\webapp</directory>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <resources>
+            <resource>
+                <directory>/home/vitalik/Music/CourseWorkHibernate/src/main/webapp</directory>
+            </resource>
+        </resources>
     </build>
 </project>

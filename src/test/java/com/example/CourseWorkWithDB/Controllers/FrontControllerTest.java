@@ -1,5 +1,8 @@
 package com.example.CourseWorkWithDB.Controllers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import com.example.CourseWorkWithDB.Model.JPA.Customer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,11 +17,11 @@ import java.util.Optional;
 
 class FrontControllerTest {
 
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
+
     @Test
     @DisplayName("DBConnectionSelect")
-    public void testDBConnectionSelect() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
-
+    void testDBConnectionSelect() {
         EntityManager em = factory.createEntityManager();
 
         Query q = em.createQuery("select c from Customer c");
@@ -29,14 +32,28 @@ class FrontControllerTest {
 
     @Test
     @DisplayName("DBConnectionInsert")
-    public void testDBConnectionInsert() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
+    void testDBConnectionInsert() {
+        Customer customer = new Customer("admin2", "admin2@gmail.com", "123");
+        customer.setLots(null);
+        customer.setOffers(null);
 
         EntityManager em = factory.createEntityManager();
 
-        Query q = em.createQuery("select c from Customer c");
-        Optional<List<Customer>> customerEntities = Optional.of(q.getResultList());
+            em.getTransaction().begin();
+            em.persist(customer);
+            em.getTransaction().commit();
+            em.close();
+        testCCPreserve(customer);
 
-        System.out.println(customerEntities.get());
+    }
+
+    @Test
+    void testCCPreserve(Customer customer) {
+        EntityManager em = factory.createEntityManager();
+
+        Query q = em.createQuery("select c from Customer c");
+        List<Customer> customerEntities = q.getResultList();
+
+        assertEquals(customerEntities.get(0), customer);
     }
 }

@@ -1,6 +1,9 @@
 package com.example.CourseWorkWithDB.Model.JPA;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,19 +13,26 @@ import java.util.List;
 @Table(name = "lot")
 @Getter
 @Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Lot {
     @Id
     @Column(name = "id", nullable = false)
+    @NonNull
     private Long id;
 
+    @NonNull
     private String name;
     private String description;
     @Column(name = "start_price")
+    @NonNull
     private double startPrice;
     @Column(name = "offers_count")
+    @NonNull
     private int offersCount;
     @Column(name = "is_active")
+    @NonNull
     private boolean isActive;
 
     @ManyToOne
@@ -34,16 +44,4 @@ public class Lot {
 
     @Column(name = "create_time")
     private Instant createTime;
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

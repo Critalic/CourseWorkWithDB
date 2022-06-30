@@ -1,25 +1,39 @@
 package com.example.CourseWorkWithDB.Model.JPA;
 
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
 @Table(name = "customer")
 public class Customer {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "username")
+    @NonNull
     private String name;
+    @NonNull
     private String email;
+    @NonNull
     private String password;
 
     @ToString.Exclude
@@ -27,6 +41,6 @@ public class Customer {
     private List<Lot> lots;
 
     @ToString.Exclude
-    @OneToOne(mappedBy = "offerer")
-    private LotOffer offer;
+    @OneToMany(mappedBy = "offerer")
+    private List<LotOffer> offers;
 }

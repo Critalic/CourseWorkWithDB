@@ -1,6 +1,6 @@
 package com.example.CourseWorkWithDB.DAO;
 
-import com.example.CourseWorkWithDB.Model.Lot;
+import com.example.CourseWorkWithDB.Entity.Lot;
 
 import java.sql.SQLException;
 import java.util.List;

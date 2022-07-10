@@ -1,4 +1,4 @@
-package com.example.CourseWorkWithDB.Model.JPA;
+package com.example.CourseWorkWithDB.Entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

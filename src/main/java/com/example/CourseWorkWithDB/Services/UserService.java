@@ -1,28 +1,35 @@
 package com.example.CourseWorkWithDB.Services;
 
-import com.example.CourseWorkWithDB.DAO.IDAOFactory;
+import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Exceptions.*;
-import com.example.CourseWorkWithDB.Model.User;
 import com.example.CourseWorkWithDB.Validators.EmailValidator;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;
+import jdk.javadoc.internal.doclets.toolkit.util.ClassUseMapper;
+import org.hibernate.query.NativeQuery;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 
 public class UserService {
-    private final IDAOFactory daoFactory;
+    private final EntityManagerFactory managerFactory;
 
-    public UserService(IDAOFactory daoFactory) {
-        this.daoFactory = daoFactory;
+    public UserService(EntityManagerFactory managerFactory) {
+        this.managerFactory = managerFactory;
     }
 
-    public User logIn(String login, String password) throws SQLException, NoSuchAlgorithmException, WrongPasswordException {
-
-
+    public Customer logIn(String login, String password) throws SQLException, NoSuchAlgorithmException, WrongPasswordException {
         EmptyValidator.checkIfEmpty(login, "LogIn");
-        User user = daoFactory.getUserDAO().getUser(login);
+
+        EntityManager manager = managerFactory.createEntityManager();
+
+        Query query = manager.createNativeQuery("select * from customer where email = ?;");
+
+        Customer user = managerFactory.getUserDAO().getUser(login);
 
         password = EmptyValidator.checkIfEmpty(password, "Password");
         password = getHash(password);
@@ -45,7 +52,7 @@ public class UserService {
         }
 
         EmailValidator.validate(login);
-        daoFactory.getUserDAO().createUser(
+        managerFactory.getUserDAO().createUser(
                 new User(name, login, getHash(password))
         );
     }

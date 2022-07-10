@@ -3,8 +3,6 @@ package com.example.CourseWorkWithDB.Services;
 import com.example.CourseWorkWithDB.DAO.IDAOFactory;
 import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
 import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
-import com.example.CourseWorkWithDB.Model.Lot;
-import com.example.CourseWorkWithDB.Model.LotOffer;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;
 import com.example.CourseWorkWithDB.Validators.NumberValidator;
 

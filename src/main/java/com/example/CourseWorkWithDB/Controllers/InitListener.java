@@ -17,20 +17,20 @@ import java.sql.SQLException;
 
 
 public class InitListener implements ServletContextListener {
-    @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        FrontController frontController = new FrontController();
-        Connection connection = getSQLConnection(frontController);
-//        System.out.println(dataSource.getClass().getName());
-
-        IDAOFactory daoFactory = new SQLDAOFactory(connection);
-        StrategySelector strategySelector = new StrategySelector(
-                new UserService(daoFactory),
-                new LotService(daoFactory),
-                new LotOfferService(daoFactory)
-        );
-        servletContextEvent.getServletContext().setAttribute("selector", strategySelector);
-    }
+//    @Override
+//    public void contextInitialized(ServletContextEvent servletContextEvent) {
+//        FrontController frontController = new FrontController();
+//        Connection connection = getSQLConnection(frontController);
+////        System.out.println(dataSource.getClass().getName());
+//
+//        IDAOFactory daoFactory = new SQLDAOFactory(connection);
+//        StrategySelector strategySelector = new StrategySelector(
+//                new UserService(daoFactory),
+//                new LotService(daoFactory),
+//                new LotOfferService(daoFactory)
+//        );
+//        servletContextEvent.getServletContext().setAttribute("selector", strategySelector);
+//    }
 
     private Connection getSQLConnection(FrontController frontController) {
         String dataSourceName = frontController.getServletContext().getInitParameter("DataSource");

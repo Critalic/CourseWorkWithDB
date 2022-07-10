@@ -2,7 +2,6 @@ package com.example.CourseWorkWithDB.Controllers.Strats;
 
 import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
 import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
-import com.example.CourseWorkWithDB.Model.User;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
 

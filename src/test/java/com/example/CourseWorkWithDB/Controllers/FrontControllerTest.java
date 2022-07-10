@@ -3,10 +3,10 @@ package com.example.CourseWorkWithDB.Controllers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.example.CourseWorkWithDB.Model.JPA.Customer;
+import com.example.CourseWorkWithDB.Entity.Customer;
 import java.util.Optional;
-import org.hibernate.query.NativeQuery;
-import org.junit.jupiter.api.DisplayName;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -16,8 +16,8 @@ import javax.persistence.Query;
 
 import java.util.List;
 
-class FrontControllerTest {
 
+class FrontControllerTest {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
 
     @Test
@@ -31,6 +31,7 @@ class FrontControllerTest {
     }
 
     @Test
+    @Disabled
     void testPersist() {
         Customer customer = new Customer("admin4", "admin4@gmail.com", "123");
 
@@ -49,6 +50,7 @@ class FrontControllerTest {
     }
 
     @Test
+    @Disabled
     void testRemove() {
         EntityManager em = factory.createEntityManager();
 
@@ -65,6 +67,7 @@ class FrontControllerTest {
     }
 
     @Test
+    @Disabled
     void testFind() {
         EntityManager em = factory.createEntityManager();
 

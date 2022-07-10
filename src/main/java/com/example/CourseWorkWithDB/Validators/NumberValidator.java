@@ -9,7 +9,7 @@ public class NumberValidator {
         return value;
     }
 
-    public static long lessThanGivenNumber(long value, long number) throws LessThanGivenException {
+    public static long lessThanGivenNumber(long value, double number) throws LessThanGivenException {
         if(value<=number) throw new LessThanGivenException("The proposition should be bigger than the current price");
         return value;
     }

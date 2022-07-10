@@ -53,7 +53,7 @@ public class UserService {
 
         EmailValidator.validate(login);
         managerFactory.getUserDAO().createUser(
-                new User(name, login, getHash(password))
+                new Customer(name, login, getHash(password))
         );
     }
     private String getHash(String passwordToHash) throws NoSuchAlgorithmException {

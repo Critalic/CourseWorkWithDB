@@ -1,6 +1,8 @@
 package com.example.CourseWorkWithDB.Services;
 
 import com.example.CourseWorkWithDB.DAO.IDAOFactory;
+import com.example.CourseWorkWithDB.Entity.Lot;
+import com.example.CourseWorkWithDB.Entity.LotOffer;
 import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
 import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;

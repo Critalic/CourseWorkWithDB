@@ -1,8 +1,12 @@
 package com.example.CourseWorkWithDB.Services;
 
+import com.example.CourseWorkWithDB.Entity.Customer;
+import com.example.CourseWorkWithDB.Entity.Lot;
+import com.example.CourseWorkWithDB.Entity.LotOffer;
 import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;
 import com.example.CourseWorkWithDB.Validators.NumberValidator;
+import org.springframework.data.domain.ExampleMatcher;
 
 import javax.persistence.EntityManagerFactory;
 import java.sql.SQLException;
@@ -34,6 +38,7 @@ public class LotService {
     }
 
     public Lot getLotById(long id) throws SQLException {
+        ExampleMatcher
         return managerFactory.getLotDAO().getLot(id);
     }
 
@@ -42,7 +47,7 @@ public class LotService {
         managerFactory.getLotDAO().updateStatus(lotId, value);
     }
 
-    public void deleteLot(long lotId, User owner) throws SQLException {
+    public void deleteLot(long lotId, Customer owner) throws SQLException {
             managerFactory.getLotDAO().deleteLot(lotId);
     }
 

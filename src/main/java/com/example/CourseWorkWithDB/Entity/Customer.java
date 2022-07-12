@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -33,7 +34,8 @@ public class Customer {
     @NonNull
     private String email;
     @NonNull
-    private String password;
+    @Column(name = "password")
+    private String passwordHash;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "customer")
@@ -42,4 +44,14 @@ public class Customer {
     @ToString.Exclude
     @OneToMany(mappedBy = "offerer")
     private List<LotOffer> offers;
+
+    public Customer setEmail(String email) {
+        this.email=email;
+        return this;
+    }
+
+    public Customer setId(Long id) {
+        this.id=id;
+        return this;
+    }
 }

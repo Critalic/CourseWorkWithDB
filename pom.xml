@@ -92,7 +92,7 @@
 
         <resources>
             <resource>
-                <directory>/home/vitalik/Music/CourseWorkHibernate/src/main/webapp</directory>
+                <directory>F:\Real Intellij projects\CourseWorkWithDB\Java\src\main\webapp\</directory>
             </resource>
         </resources>
     </build>

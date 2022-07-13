@@ -1,5 +1,6 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Services.LotService;
 
 import javax.servlet.ServletException;

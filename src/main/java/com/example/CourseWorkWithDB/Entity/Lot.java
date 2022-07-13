@@ -27,7 +27,7 @@ public class Lot {
     private String description;
     @Column(name = "start_price")
     @NonNull
-    private double startPrice;
+    private Double startPrice;
     @Column(name = "offers_count")
     @NonNull
     private int offersCount;

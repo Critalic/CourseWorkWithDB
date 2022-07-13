@@ -11,26 +11,26 @@ import com.example.CourseWorkWithDB.Validators.NumberValidator;
 import java.sql.SQLException;
 
 public class LotOfferService {
-    private final IDAOFactory daoFactory;
-
-    public LotOfferService(IDAOFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
-
-    public void createNewOfferWithoutDescription(int money, long lotId, long userID)
-            throws LessThanZeroException, SQLException, LessThanGivenException {
-        NumberValidator.moreThanZero(lotId, "Lot ID");
-        Lot lot= daoFactory.getLotDAO().getLot(lotId);
-        money = (int) NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
-        daoFactory.getLotOfferDAO().addLotOfferWithoutDescription(new LotOffer(money, userID, lotId));
-    }
-
-    public void createNewOfferWithDescription(int money, long lotId, long userID, String description)
-            throws LessThanZeroException, SQLException, LessThanGivenException, NullPointerException, IllegalArgumentException {
-        description = EmptyValidator.checkIfEmpty(description, "Text");
-        NumberValidator.moreThanZero(lotId, "Lot ID");
-        Lot lot= daoFactory.getLotDAO().getLot(lotId);
-        money = (int) NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
-        daoFactory.getLotOfferDAO().addLotOfferWithoutDescription(new LotOffer(userID, lotId, description, money));
-    }
+//    private final IDAOFactory daoFactory;
+//
+//    public LotOfferService(IDAOFactory daoFactory) {
+//        this.daoFactory = daoFactory;
+//    }
+//
+//    public void createNewOfferWithoutDescription(int money, long lotId, long userID)
+//            throws LessThanZeroException, SQLException, LessThanGivenException {
+//        NumberValidator.moreThanZero(lotId, "Lot ID");
+//        Lot lot= daoFactory.getLotDAO().getLot(lotId);
+//        money = (int) NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
+//        daoFactory.getLotOfferDAO().addLotOfferWithoutDescription(new LotOffer(money, userID, lotId));
+//    }
+//
+//    public void createNewOfferWithDescription(int money, long lotId, long userID, String description)
+//            throws LessThanZeroException, SQLException, LessThanGivenException, NullPointerException, IllegalArgumentException {
+//        description = EmptyValidator.checkIfEmpty(description, "Text");
+//        NumberValidator.moreThanZero(lotId, "Lot ID");
+//        Lot lot= daoFactory.getLotDAO().getLot(lotId);
+//        money = (int) NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
+//        daoFactory.getLotOfferDAO().addLotOfferWithoutDescription(new LotOffer(userID, lotId, description, money));
+//    }
 }

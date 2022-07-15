@@ -3,16 +3,16 @@ package com.example.CourseWorkWithDB.Controllers;
 //import com.example.CourseWorkWithDB.Controllers.Strats.*;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Services.UserService;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 
 
 public class StrategySelector {
-    private final UserService userService;
+    private final CustomerService customerService;
     private final LotService lotService;
     private final LotOfferService lotOfferService;
 
-    public StrategySelector(UserService userService, LotService lotService, LotOfferService lotOfferService) {
-        this.userService = userService;
+    public StrategySelector(CustomerService customerService, LotService lotService, LotOfferService lotOfferService) {
+        this.customerService = customerService;
         this.lotService = lotService;
         this.lotOfferService = lotOfferService;
     }

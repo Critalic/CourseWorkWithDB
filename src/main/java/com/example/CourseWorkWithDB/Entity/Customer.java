@@ -1,20 +1,9 @@
 package com.example.CourseWorkWithDB.Entity;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Getter
@@ -23,7 +12,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 @Table(name = "customer")
-public class Customer {
+public class Customer implements BasicEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,12 +35,17 @@ public class Customer {
     private List<LotOffer> offers;
 
     public Customer setEmail(String email) {
-        this.email=email;
+        this.email = email;
         return this;
     }
 
     public Customer setId(Long id) {
-        this.id=id;
+        this.id = id;
+        return this;
+    }
+
+    public Customer setName(String name) {
+        this.name = name;
         return this;
     }
 }

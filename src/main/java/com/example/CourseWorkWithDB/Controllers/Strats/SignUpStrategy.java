@@ -2,7 +2,7 @@ package com.example.CourseWorkWithDB.Controllers.Strats;
 
 import com.example.CourseWorkWithDB.Exceptions.InvalidEmailException;
 import com.example.CourseWorkWithDB.Exceptions.WrongPasswordException;
-import com.example.CourseWorkWithDB.Services.UserService;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +12,16 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class SignUpStrategy extends SomeStrat {
-    private final UserService userService;
+    private final CustomerService customerService;
 
-    public SignUpStrategy (UserService userService) {
-        this.userService = userService;
+    public SignUpStrategy (CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             try {
-                userService.signUp(
+                customerService.signUp(
                         request.getParameter("email"),
                         request.getParameter("name"),
                         request.getParameter("password1"),

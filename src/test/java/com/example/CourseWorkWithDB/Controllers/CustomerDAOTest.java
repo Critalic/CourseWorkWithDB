@@ -1,6 +1,7 @@
 package com.example.CourseWorkWithDB.Controllers;
 
-import com.example.CourseWorkWithDB.DAO.JPA.CustomerDAO;
+import com.example.CourseWorkWithDB.DAO.JPA.Implementations.CustomerDAO;
+import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class CustomerDAOTest {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
-    CustomerDAO customerDAO = new CustomerDAO(factory);
+    DAO<Customer> customerDAO = new CustomerDAO(factory);
 
     @Test
     public void testSave() {

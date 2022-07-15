@@ -1,39 +1,68 @@
 package com.example.CourseWorkWithDB.Entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Table(name = "lot_offer")
 @Getter
-@Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 @Entity
-public class LotOffer {
+public class LotOffer implements BasicEntity {
     @Id
     @Column(name = "id", nullable = false)
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
     @Column(name = "suggested_price")
     @NonNull
-    private double suggestedPrice;
+    private Double suggestedPrice;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer offerer;
 
     @ManyToOne
+    @NonNull
     @JoinColumn(name = "lot_id", referencedColumnName = "id")
     private Lot lot;
 
-    @Column(name = "create_time")
-    private Instant createTime;
+    @Column(name = "create_time", insertable = false, updatable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createTime;
+
+    public LotOffer setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public LotOffer setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public LotOffer setSuggestedPrice(double suggestedPrice) {
+        this.suggestedPrice = suggestedPrice;
+        return this;
+    }
+
+    public LotOffer setOfferer(Customer offerer) {
+        this.offerer = offerer;
+        return this;
+    }
+
+    public LotOffer setLot(Lot lot) {
+        this.lot = lot;
+        return this;
+    }
+
+    public LotOffer setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+        return this;
+    }
 }

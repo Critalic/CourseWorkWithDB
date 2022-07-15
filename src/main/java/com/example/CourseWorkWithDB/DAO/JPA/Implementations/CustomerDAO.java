@@ -1,5 +1,6 @@
-package com.example.CourseWorkWithDB.DAO.JPA;
+package com.example.CourseWorkWithDB.DAO.JPA.Implementations;
 
+import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.Entity.Customer;
 
 import javax.persistence.EntityManager;
@@ -9,12 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.example.CourseWorkWithDB.DAO.JPA.Utils.*;
 
@@ -35,18 +32,11 @@ public class CustomerDAO implements DAO<Customer> {
     public List<Customer> getAll(Customer identifier) {
         EntityManager manager = entityManagerFactory.createEntityManager();
 
-        CriteriaBuilder criteriaBuilder = entityManagerFactory.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
         CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
         Root<Customer> customerRoot = criteriaQuery.from(Customer.class);
 
-        Field[] fields = Arrays.stream(identifier.getClass().getDeclaredFields())
-                .filter(field -> Objects.nonNull(getValue(field, identifier)))
-                .filter(field -> !field.getType().equals(List.class) || field.getName().equals("passwordHash"))
-                .toArray(Field[]::new);
-
-        List<Predicate> searchCriteria = Arrays.stream(fields)
-                .map(field -> convertToCriteriaPredicate(field, criteriaBuilder, customerRoot, identifier))
-                .collect(Collectors.toList());
+        List<Predicate> searchCriteria = convertFieldsToPredicates(identifier, criteriaBuilder, customerRoot);
 
         criteriaQuery.select(customerRoot).where(criteriaBuilder.and(searchCriteria.toArray(new Predicate[0])));
         return manager.createQuery(criteriaQuery).getResultList();

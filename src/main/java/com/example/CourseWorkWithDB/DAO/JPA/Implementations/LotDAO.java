@@ -1,5 +1,6 @@
-package com.example.CourseWorkWithDB.DAO.JPA;
+package com.example.CourseWorkWithDB.DAO.JPA.Implementations;
 
+import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.Entity.Lot;
 
 import javax.persistence.EntityManager;
@@ -9,12 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.example.CourseWorkWithDB.DAO.JPA.Utils.*;
 
@@ -39,14 +36,7 @@ public class LotDAO implements DAO<Lot> {
         CriteriaQuery<Lot> criteriaQuery = criteriaBuilder.createQuery(Lot.class);
         Root<Lot> lotRoot = criteriaQuery.from(Lot.class);
 
-        Field[] fields = Arrays.stream(identifier.getClass().getDeclaredFields())
-                .filter(field -> Objects.nonNull(getValue(field, identifier)))
-                .filter(field -> !field.getType().equals(List.class))
-                .toArray(Field[]::new);
-
-        List<Predicate> searchCriteria = Arrays.stream(fields)
-                .map(field -> convertToCriteriaPredicate(field, criteriaBuilder, lotRoot, identifier))
-                .collect(Collectors.toList());
+        List<Predicate> searchCriteria = convertFieldsToPredicates(identifier, criteriaBuilder, lotRoot);
 
         criteriaQuery.select(lotRoot).where(criteriaBuilder.and(searchCriteria.toArray(new Predicate[0])));
         return entityManager.createQuery(criteriaQuery).getResultList();

@@ -1,6 +1,7 @@
 package com.example.CourseWorkWithDB.Services;
 
 import com.example.CourseWorkWithDB.DAO.IDAOFactory;
+import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
 import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
@@ -11,17 +12,19 @@ import com.example.CourseWorkWithDB.Validators.NumberValidator;
 import java.sql.SQLException;
 
 public class LotOfferService {
-//    private final IDAOFactory daoFactory;
+//    private final DAO<LotOffer> lotOfferDAO;
+//    private final DAO<Lot> lotDAO;
 //
-//    public LotOfferService(IDAOFactory daoFactory) {
-//        this.daoFactory = daoFactory;
+//    public LotOfferService(DAO<LotOffer> lotOfferDAO, DAO<Lot> lotDAO) {
+//        this.lotOfferDAO = lotOfferDAO;
+//        this.lotDAO = lotDAO;
 //    }
 //
-//    public void createNewOfferWithoutDescription(int money, long lotId, long userID)
+//    public void createNewOfferWithoutDescription(double money, long lotId, long userID)
 //            throws LessThanZeroException, SQLException, LessThanGivenException {
 //        NumberValidator.moreThanZero(lotId, "Lot ID");
-//        Lot lot= daoFactory.getLotDAO().getLot(lotId);
-//        money = (int) NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
+//        Lot lot= lotDAO.get(lotId).orElseThrow(()-> new RuntimeException("No lot with given ID found"));
+//        NumberValidator.lessThanGivenNumber(money, lot.getStartPrice());
 //        daoFactory.getLotOfferDAO().addLotOfferWithoutDescription(new LotOffer(money, userID, lotId));
 //    }
 //

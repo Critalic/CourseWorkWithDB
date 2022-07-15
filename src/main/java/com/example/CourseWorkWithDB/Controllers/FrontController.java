@@ -1,9 +1,16 @@
 package com.example.CourseWorkWithDB.Controllers;
 
 
+import com.example.CourseWorkWithDB.DAO.JPA.DAO;
+import com.example.CourseWorkWithDB.DAO.JPA.Implementations.CustomerDAO;
+import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotDAO;
+import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotOfferDAO;
+import com.example.CourseWorkWithDB.Entity.Customer;
+import com.example.CourseWorkWithDB.Entity.Lot;
+import com.example.CourseWorkWithDB.Entity.LotOffer;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Services.UserService;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,10 +30,15 @@ public class FrontController extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
 //        strategySelector = (StrategySelector) config.getServletContext().getAttribute("selector");
 //        EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
+//
+//        DAO<Customer> customerDAO = new CustomerDAO(factory);
+//        DAO<Lot> lotDAO = new LotDAO(factory);
+//        DAO<LotOffer> lotOfferDAO = new LotOfferDAO(factory);
+//
 //        this.strategySelector = new StrategySelector(
-//                new UserService(factory),
+//                new CustomerService(customerDAO),
 //                new LotService(factory),
-//                new LotOfferService(factory)
+//                new LotOfferService(lotOfferDAO, lotDAO)
 //        );
     }
 

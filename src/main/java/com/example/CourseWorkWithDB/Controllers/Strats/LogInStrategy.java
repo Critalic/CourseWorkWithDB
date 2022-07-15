@@ -1,7 +1,7 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
 import com.example.CourseWorkWithDB.Exceptions.WrongPasswordException;
-import com.example.CourseWorkWithDB.Services.UserService;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +11,17 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class LogInStrategy extends SomeStrat {
-    private final UserService userService;
+    private final CustomerService customerService;
 
-    public LogInStrategy(UserService userService) {
-        this.userService = userService;
+    public LogInStrategy(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.getSession().setAttribute("user",
-                    userService.logIn(
+                    customerService.logIn(
                             request.getParameter("email").trim(),
                             request.getParameter("password").trim()
                     )

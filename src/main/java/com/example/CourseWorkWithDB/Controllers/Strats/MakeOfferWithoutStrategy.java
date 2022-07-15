@@ -1,5 +1,6 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
 import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
@@ -23,9 +24,9 @@ public class MakeOfferWithoutStrategy extends SomeStrat {
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = (User) request.getSession().getAttribute("user");
+            Customer user = (Customer) request.getSession().getAttribute("user");
             lotOfferService.createNewOfferWithoutDescription(
-                    Integer.parseInt(request.getParameter("money")),
+                    Double.parseDouble(request.getParameter("money")),
                     Long.parseLong((String) request.getSession().getAttribute("lotId")),
                     user.getId()
             );

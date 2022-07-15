@@ -13,7 +13,7 @@ public interface DAO<T> {
 
     void save(T object);
 
-    void delete(T identifier);
+    void delete(T object);
 
-    void update(T identifier);
+    void update(T object);
 }

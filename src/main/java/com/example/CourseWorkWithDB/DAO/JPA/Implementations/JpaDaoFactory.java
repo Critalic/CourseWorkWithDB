@@ -59,7 +59,8 @@ public class JpaDaoFactory implements DAOFactory {
 
             @Override
             public void save(T object) {
-                conductInTransaction(entityManager -> entityManager.persist(object), entityManagerFactory.createEntityManager());
+                conductInTransaction(entityManager -> entityManager.persist(object),
+                        entityManagerFactory.createEntityManager());
             }
 
             @Override
@@ -70,7 +71,8 @@ public class JpaDaoFactory implements DAOFactory {
 
             @Override
             public void update(T object) {
-                conductInTransaction(entityManager -> entityManager.merge(object), entityManagerFactory.createEntityManager());
+                conductInTransaction(entityManager -> entityManager.merge(object),
+                        entityManagerFactory.createEntityManager());
             }
         };
     }

@@ -14,16 +14,16 @@ import java.util.List;
 
 public class LotDAOTest {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
-    DAO<Lot> lotDAO = new LotDAO(factory);
-    DAO<Customer> customerDAO = new CustomerDAO(factory);
+    DAO<Lot> lotDAO = new JpaDaoFactory(factory).getDAO(Lot.class);
+    DAO<Customer> customerDAO =new JpaDaoFactory(factory).getDAO(Customer.class);
 
     @Test
     public void saveTest() {
-        Customer customer = customerDAO.get(1L).get();
-        Lot lot = new Lot("Tea cups", 32.5, false, customer);
+        Customer customer = new Customer().setId(3L);
+        Lot lot = new Lot("BMW", 32000., false, customer).setDescription("BMW e39 M5");
         lotDAO.save(lot);
 
-        System.out.println(customer.getLots().get(0).getName());
+        System.out.println(customerDAO.get(3L).get().getLots().get(0).getName());
     }
 
     @Test

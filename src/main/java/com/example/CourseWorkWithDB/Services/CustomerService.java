@@ -1,6 +1,7 @@
 package com.example.CourseWorkWithDB.Services;
 
 import com.example.CourseWorkWithDB.DAO.JPA.DAO;
+import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Exceptions.InvalidEmailException;
 import com.example.CourseWorkWithDB.Exceptions.WrongPasswordException;
@@ -13,10 +14,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class CustomerService {
+    private final DAOFactory daoFactory;
     private final DAO<Customer> customerDAO;
 
-    public CustomerService(DAO<Customer> customerDAO) {
-        this.customerDAO = customerDAO;
+    public CustomerService(DAOFactory daoFactory) {
+        this.daoFactory = daoFactory;
+        this.customerDAO = daoFactory.getDAO(Customer.class);
     }
 
     public Customer logIn(String login, String password) throws WrongPasswordException, NoSuchAlgorithmException {

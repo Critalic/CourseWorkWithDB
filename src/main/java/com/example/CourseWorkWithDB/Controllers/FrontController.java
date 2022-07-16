@@ -1,16 +1,11 @@
 package com.example.CourseWorkWithDB.Controllers;
 
 
-import com.example.CourseWorkWithDB.DAO.JPA.DAO;
-import com.example.CourseWorkWithDB.DAO.JPA.Implementations.CustomerDAO;
-import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotDAO;
-import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotOfferDAO;
-import com.example.CourseWorkWithDB.Entity.Customer;
-import com.example.CourseWorkWithDB.Entity.Lot;
-import com.example.CourseWorkWithDB.Entity.LotOffer;
+import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
+import com.example.CourseWorkWithDB.DAO.JPA.Implementations.JpaDaoFactory;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -28,18 +23,16 @@ public class FrontController extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-//        strategySelector = (StrategySelector) config.getServletContext().getAttribute("selector");
-//        EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
-//
-//        DAO<Customer> customerDAO = new CustomerDAO(factory);
-//        DAO<Lot> lotDAO = new LotDAO(factory);
-//        DAO<LotOffer> lotOfferDAO = new LotOfferDAO(factory);
-//
-//        this.strategySelector = new StrategySelector(
-//                new CustomerService(customerDAO),
-//                new LotService(factory),
-//                new LotOfferService(lotOfferDAO, lotDAO)
-//        );
+        strategySelector = (StrategySelector) config.getServletContext().getAttribute("selector");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
+
+        DAOFactory daoFactory = new JpaDaoFactory(factory);
+
+        this.strategySelector = new StrategySelector(
+                new CustomerService(daoFactory),
+                new LotService(daoFactory),
+                new LotOfferService(daoFactory)
+        );
     }
 
     private String getPath(HttpServletRequest reqest) {
@@ -48,12 +41,12 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest reqest, HttpServletResponse response) throws ServletException, IOException {
-//        strategySelector.getStrategy(getPath(reqest)).execGet(reqest, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        strategySelector.getStrategy(getPath(request)).execGet(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest reqest, HttpServletResponse response) throws ServletException, IOException {
-//        strategySelector.getStrategy(getPath(reqest)).execPost(reqest, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        strategySelector.getStrategy(getPath(request)).execPost(request, response);
     }
 }

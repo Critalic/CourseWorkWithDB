@@ -1,5 +1,6 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Services.LotService;
 
 import javax.servlet.ServletException;
@@ -18,8 +19,8 @@ public class DeleteLotStrategy extends SomeStrat{
     public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             long lotId = (long) request.getSession().getAttribute("lotId");
-            User user = (User) request.getSession().getAttribute("user");
-            lotService.deleteLot(lotId, user);
+            Customer user = (Customer) request.getSession().getAttribute("user");
+            lotService.deleteLot(lotId);
             request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
             request.getSession().setAttribute("lots", lotService.getLots());
         } catch (SQLException e) {

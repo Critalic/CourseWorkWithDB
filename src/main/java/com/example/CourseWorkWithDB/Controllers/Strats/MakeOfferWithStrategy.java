@@ -23,7 +23,7 @@ public class MakeOfferWithStrategy extends SomeStrat {
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = (User) request.getSession().getAttribute("user");
-            lotOfferService.createNewOfferWithDescription(
+            lotOfferService.createOffer(
                     Integer.parseInt(request.getParameter("money")),
                     Long.parseLong((String) request.getSession().getAttribute("lotId")),
                     user.getId(),

@@ -26,7 +26,7 @@ public class LogInStrategy extends SomeStrat {
                             request.getParameter("password").trim()
                     )
             );
-        } catch (SQLException | NoSuchAlgorithmException | WrongPasswordException e) {
+        } catch (NoSuchAlgorithmException | WrongPasswordException e) {
             request.setAttribute("errorMessage", e.getLocalizedMessage());
             forwardError(request, response,"DefinedError");
             return;

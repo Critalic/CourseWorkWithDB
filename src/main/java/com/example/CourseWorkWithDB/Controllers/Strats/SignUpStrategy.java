@@ -1,7 +1,5 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
-import com.example.CourseWorkWithDB.Exceptions.InvalidEmailException;
-import com.example.CourseWorkWithDB.Exceptions.WrongPasswordException;
 import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.servlet.ServletException;

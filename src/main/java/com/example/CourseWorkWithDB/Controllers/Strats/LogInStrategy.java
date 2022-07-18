@@ -1,14 +1,15 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
-import com.example.CourseWorkWithDB.Exceptions.WrongPasswordException;
 import com.example.CourseWorkWithDB.Services.CustomerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 
 public class LogInStrategy extends SomeStrat {
     private final CustomerService customerService;
@@ -19,6 +20,8 @@ public class LogInStrategy extends SomeStrat {
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
         try {
             request.getSession().setAttribute("user",
                     customerService.logIn(

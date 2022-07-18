@@ -5,20 +5,16 @@ import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
-import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
-import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;
 import com.example.CourseWorkWithDB.Validators.NumberValidator;
 
 import java.sql.SQLException;
 
 public class LotOfferService {
-    private final DAOFactory daoFactory;
     private final DAO<LotOffer> lotOfferDAO;
     private final DAO<Lot> lotDAO;
 
     public LotOfferService(DAOFactory daoFactory) {
-        this.daoFactory = daoFactory;
         this.lotOfferDAO = daoFactory.getDAO(LotOffer.class);
         this.lotDAO = daoFactory.getDAO(Lot.class);
     }

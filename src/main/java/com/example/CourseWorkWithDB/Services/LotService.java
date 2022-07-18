@@ -5,7 +5,6 @@ import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
-import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
 import com.example.CourseWorkWithDB.Validators.EmptyValidator;
 import com.example.CourseWorkWithDB.Validators.NumberValidator;
 
@@ -16,12 +15,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LotService {
-    private final DAOFactory daoFactory;
     private final DAO<Lot> lotDAO;
     private final DAO<LotOffer> lotOfferDAO;
 
     public LotService(DAOFactory daoFactory) {
-        this.daoFactory = daoFactory;
         this.lotDAO = daoFactory.getDAO(Lot.class);
         this.lotOfferDAO = daoFactory.getDAO(LotOffer.class);
     }

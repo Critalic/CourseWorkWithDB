@@ -1,8 +1,5 @@
 package com.example.CourseWorkWithDB.Validators;
 
-import com.example.CourseWorkWithDB.Exceptions.LessThanGivenException;
-import com.example.CourseWorkWithDB.Exceptions.LessThanZeroException;
-
 public class NumberValidator {
     public static void moreThanZero(double value, String valueName) throws LessThanZeroException {
         if(value<0) throw new LessThanZeroException(valueName + " should be more than or equal to zero");

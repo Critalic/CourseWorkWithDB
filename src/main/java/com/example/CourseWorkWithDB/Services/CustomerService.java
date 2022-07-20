@@ -19,7 +19,7 @@ public class CustomerService {
         this.customerDAO = daoFactory.getDAO(Customer.class);
     }
 
-    public Customer logIn(String login, String password) throws WrongPasswordException, NoSuchAlgorithmException {
+    public Customer logIn(String login, String password) throws NoSuchAlgorithmException {
         EmptyValidator.checkIfEmpty(login, "LogIn");
         password = EmptyValidator.checkIfEmpty(password, "Password"); //TODO refactor
 
@@ -38,8 +38,7 @@ public class CustomerService {
         return customer;
     }
 
-    public void signUp(String login, String name, String password, String password2) throws WrongPasswordException,
-            InvalidEmailException, NoSuchAlgorithmException {
+    public void signUp(String login, String name, String password, String password2) throws NoSuchAlgorithmException {
         login = EmptyValidator.checkIfEmpty(login, "Login");
         name = EmptyValidator.checkIfEmpty(name, "Name");
         password = EmptyValidator.checkIfEmpty(password, "Password");

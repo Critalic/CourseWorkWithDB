@@ -34,9 +34,9 @@ public class Lot implements BasicEntity {
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "lot")
-    @ToString.Exclude
-    private List<LotOffer> offers;
+//    @OneToMany(mappedBy = "lot")
+//    @ToString.Exclude
+//    private List<LotOffer> offers;
 
     @Column(name = "create_time", insertable = false, updatable = false,
             columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

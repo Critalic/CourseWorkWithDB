@@ -10,29 +10,32 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class SignUpStrategy extends SomeStrat {
+
     private final CustomerService customerService;
 
-    public SignUpStrategy (CustomerService customerService) {
+    public SignUpStrategy(CustomerService customerService) {
         this.customerService = customerService;
     }
 
     @Override
-    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            try {
-                customerService.signUp(
-                        request.getParameter("email"),
-                        request.getParameter("name"),
-                        request.getParameter("password1"),
-                        request.getParameter("password2")
-                );
-            } catch (SQLException | InvalidEmailException | WrongPasswordException | NullPointerException | IllegalArgumentException e) {
-                request.setAttribute("errorMessage", e.getLocalizedMessage());
-                forwardError(request, response,"DefinedError");
-                return;
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace(); //TODO direct to unknown error
-            }
-        forwardToJsp(request, response,"LogIn");
+    public void execPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        try {
+            customerService.signUp(
+                request.getParameter("email"),
+                request.getParameter("name"),
+                request.getParameter("password1"),
+                request.getParameter("password2")
+            );
+        } catch (InvalidEmailException | WrongPasswordException | NullPointerException |
+                 IllegalArgumentException e) {
+            request.setAttribute("errorMessage", e.getLocalizedMessage());
+            forwardError(request, response, "DefinedError");
+            return;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace(); //TODO direct to unknown error
+        }
+        forwardToJsp(request, response, "LogIn");
     }
 
     @Override

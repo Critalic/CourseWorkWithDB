@@ -1,9 +1,9 @@
 package com.example.CourseWorkWithDB.Controllers;
 
 import com.example.CourseWorkWithDB.Controllers.Strats.*;
+import com.example.CourseWorkWithDB.Services.CustomerService;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Services.CustomerService;
 
 
 public class StrategySelector {

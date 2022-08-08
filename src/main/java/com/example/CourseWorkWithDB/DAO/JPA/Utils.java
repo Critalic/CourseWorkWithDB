@@ -23,7 +23,7 @@ public class Utils {
             field.setAccessible(true);
             return field.get(identifier);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //TODO add exception
         }
     }
 
@@ -32,7 +32,7 @@ public class Utils {
             field.setAccessible(true);
             return clazz.cast(field.get(identifier));
         } catch (IllegalAccessException | ClassCastException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //TODO add exception
         }
     }
 
@@ -51,7 +51,7 @@ public class Utils {
             return criteriaBuilder.equal(root.get(field.getName()), getEntityFieldId(field, identifier,
                     field.getType().asSubclass(BasicEntity.class)).getId());
         } else {
-            throw new RuntimeException("Unexpected parameter type");
+            throw new RuntimeException("Unexpected parameter type"); //TODO add exception
         }
     }
 
@@ -62,7 +62,7 @@ public class Utils {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw e; //TODO add exception
         } finally {
             entityManager.close();
         }

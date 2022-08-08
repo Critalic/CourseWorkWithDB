@@ -26,13 +26,13 @@ public class Customer implements BasicEntity {
     @Column(name = "password")
     private String passwordHash;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "customer")
-    private List<Lot> lots;
-
-    @ToString.Exclude
-    @OneToMany(mappedBy = "offerer")
-    private List<LotOffer> offers;
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "customer")
+//    private List<Lot> lots;
+//
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "offerer")
+//    private List<LotOffer> offers;
 
     public Customer setEmail(String email) {
         this.email = email;

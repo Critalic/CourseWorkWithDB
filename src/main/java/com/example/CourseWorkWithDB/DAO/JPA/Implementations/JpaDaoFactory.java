@@ -29,7 +29,7 @@ public class JpaDaoFactory implements DAOFactory {
         return new DAO<T>() {
             @Override
             public Optional<T> get(Long identifier) {
-                return Optional.of(entityManagerFactory.createEntityManager().find(type.asSubclass(type), identifier));
+                return Optional.of(entityManagerFactory.createEntityManager().find(type, identifier));
             }
 
             @Override
@@ -37,8 +37,8 @@ public class JpaDaoFactory implements DAOFactory {
                 EntityManager manager = entityManagerFactory.createEntityManager();
 
                 CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-                CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type.asSubclass(type));
-                Root<T> customerRoot = criteriaQuery.from(type.asSubclass(type));
+                CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+                Root<T> customerRoot = criteriaQuery.from(type);
 
                 List<Predicate> searchCriteria = convertFieldsToPredicates(identifier, criteriaBuilder, customerRoot);
 
@@ -51,8 +51,8 @@ public class JpaDaoFactory implements DAOFactory {
                 EntityManager manager = entityManagerFactory.createEntityManager();
 
                 CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-                CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type.asSubclass(type));
-                Root<T> customerRoot = criteriaQuery.from(type.asSubclass(type));
+                CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+                Root<T> customerRoot = criteriaQuery.from(type);
 
                 return manager.createQuery(criteriaQuery.select(customerRoot)).getResultList();
             }

@@ -6,6 +6,11 @@
     <title>Log in</title>
 </head>
 <body>
+<c:if test="${errorMessage != null}">
+    <script>
+        alert("${errorMessage}")
+    </script>
+</c:if>
     <div class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 ...">
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
@@ -18,18 +23,62 @@
                                 <ul class="list-disc space-y-2">
                                     <li> What's your e-mail?
                                         <div class="mb-3 pt-0">
-                                            <input type="text" name = "email" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+                                            <input required type="text" name = "email" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
                                         </div>
                                     </li>
                                     <li> Enter your password
                                         <div class="mb-3 pt-0">
-                                            <input type="password" name = "password" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+                                            <input required type="password" name = "password" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
                                         </div>
                                     </li>
                                 </ul>
                                 <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">Log in</button>
                             </form>
                         </div>
+                        <script>
+                            var createAllErrors = function() {
+                                var form = $( this ),
+                                    errorList = $( "ul.errorMessages", form );
+
+                                var showAllErrorMessages = function() {
+                                    errorList.empty();
+
+                                    // Find all invalid fields within the form.
+                                    var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
+
+                                        // Find the field's corresponding label
+                                        var label = $( "label[for=" + node.id + "] "),
+                                            // Opera incorrectly does not fill the validationMessage property.
+                                            message = node.validationMessage || 'Invalid value.';
+
+                                        errorList
+                                            .show()
+                                            .append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
+                                    });
+                                };
+
+                                // Support Safari
+                                form.on( "submit", function( event ) {
+                                    if ( this.checkValidity && !this.checkValidity() ) {
+                                        $( this ).find( ":invalid" ).first().focus();
+                                        event.preventDefault();
+                                    }
+                                });
+
+                                $( "input[type=submit], button:not([type=button])", form )
+                                    .on( "click", showAllErrorMessages);
+
+                                $( "input", form ).on( "keypress", function( event ) {
+                                    var type = $( this ).attr( "type" );
+                                    if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
+                                        && event.keyCode == 13 ) {
+                                        showAllErrorMessages();
+                                    }
+                                });
+                            };
+
+                            $( "form" ).each( createAllErrors );
+                        </script>
                     </div>
                 </div>
             </div>

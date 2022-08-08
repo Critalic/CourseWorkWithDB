@@ -11,11 +11,12 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
-
+@Disabled
 class FrontControllerTest {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
 
     @Test
+    @Disabled
     void testDBConnectionSelect() {
         EntityManager em = factory.createEntityManager();
 

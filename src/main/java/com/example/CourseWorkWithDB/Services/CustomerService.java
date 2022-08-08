@@ -3,53 +3,40 @@ package com.example.CourseWorkWithDB.Services;
 import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
-import com.example.CourseWorkWithDB.Validators.EmailValidator;
-import com.example.CourseWorkWithDB.Validators.EmptyValidator;
+import com.example.CourseWorkWithDB.Validators.Email;
+import com.example.CourseWorkWithDB.Validators.LastPairMatch;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 
-public class CustomerService {
+public class CustomerService implements BusinessService {
     private final DAO<Customer> customerDAO;
 
     public CustomerService(DAOFactory daoFactory) {
         this.customerDAO = daoFactory.getDAO(Customer.class);
     }
 
-    public Customer logIn(String login, String password) throws WrongPasswordException, NoSuchAlgorithmException {
-        EmptyValidator.checkIfEmpty(login, "LogIn");
-        password = EmptyValidator.checkIfEmpty(password, "Password"); //TODO refactor
-
+    public Customer logIn(@Email String login, @Size(min = 7) String password) throws NoSuchAlgorithmException {
         List<Customer> customers = customerDAO.getAll(new Customer().setEmail(login));
         Customer customer = customers.size() == 1 ? customers.get(0) : null;
 
         if (Objects.isNull(customer)) {
-            throw new RuntimeException("Data base error");
+            throw new IllegalArgumentException("Failed to find the specified user - " + login);
         }
 
-        password = getHash(password);
-
-        if (!customer.getPasswordHash().equals(password)) {
-            throw new WrongPasswordException("Incorrect password!");
+        if (!customer.getPasswordHash().equals(getHash(password))) {
+            throw new IllegalArgumentException("Specified password doesn't match our records");
         }
-        return customer;
+        return new Customer().setId(customer.getId()).setEmail(customer.getEmail()).setName(customer.getName());
     }
 
-    public void signUp(String login, String name, String password, String password2) throws WrongPasswordException,
-            InvalidEmailException, NoSuchAlgorithmException {
-        login = EmptyValidator.checkIfEmpty(login, "Login");
-        name = EmptyValidator.checkIfEmpty(name, "Name");
-        password = EmptyValidator.checkIfEmpty(password, "Password");
-        password2 = EmptyValidator.checkIfEmpty(password2, "Retyped password");
-
-        if (!password.equals(password2)) {
-            throw new WrongPasswordException("Password mismatch!");
-        }
-
-        EmailValidator.validate(login);
+    @LastPairMatch
+    public void signUp(@Email String login, String name, String password, @Size(min = 7) String password2)
+            throws NoSuchAlgorithmException {
         customerDAO.save(new Customer(name, login, getHash(password)));
     }
 

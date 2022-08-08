@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class LotService {
+public class LotService implements BusinessService {
     private final DAO<Lot> lotDAO;
     private final DAO<LotOffer> lotOfferDAO;
 
@@ -59,7 +59,7 @@ public class LotService {
     }
 
     public void createNewLot(long ownerID, String name, String description, double startPrice)
-            throws IllegalArgumentException, NullPointerException, LessThanZeroException {
+            throws IllegalArgumentException, NullPointerException {
         name = EmptyValidator.checkIfEmpty(name, "Name");
         description = EmptyValidator.checkIfEmpty(description, "Description");
         NumberValidator.moreThanZero(startPrice, "Start price");

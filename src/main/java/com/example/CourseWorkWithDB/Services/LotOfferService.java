@@ -10,7 +10,7 @@ import com.example.CourseWorkWithDB.Validators.NumberValidator;
 
 import java.sql.SQLException;
 
-public class LotOfferService {
+public class LotOfferService implements BusinessService {
     private final DAO<LotOffer> lotOfferDAO;
     private final DAO<Lot> lotDAO;
 
@@ -19,8 +19,7 @@ public class LotOfferService {
         this.lotDAO = daoFactory.getDAO(Lot.class);
     }
 
-    public void createOffer(double money, long lotId, long userID, String description)
-            throws LessThanZeroException, SQLException, LessThanGivenException, NullPointerException, IllegalArgumentException {
+    public void createOffer(Double money, Long lotId, Long userID, String description) {
         description = EmptyValidator.checkIfEmpty(description, "Text");
         NumberValidator.moreThanZero(lotId, "Lot ID");
         Lot lot= lotDAO.get(lotId).orElseThrow(()-> new RuntimeException("Failed to find lot"));

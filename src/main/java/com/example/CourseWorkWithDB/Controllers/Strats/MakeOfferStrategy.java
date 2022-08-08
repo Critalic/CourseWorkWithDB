@@ -1,7 +1,9 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
+import com.example.CourseWorkWithDB.Services.ValidatorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,20 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class MakeOfferWithStrategy extends SomeStrat {
-    LotOfferService lotOfferService;
-    private final LotService lotService ;
-    public MakeOfferWithStrategy(LotOfferService lotOfferService, LotService lotService) {
+public class MakeOfferStrategy extends SomeStrat {
+    private final LotOfferService lotOfferService;
+    private final LotService lotService;
+    private final ValidatorService validatorService;
+
+    public MakeOfferStrategy(LotOfferService lotOfferService, LotService lotService, ValidatorService validatorService) {
         this.lotOfferService = lotOfferService;
         this.lotService = lotService;
+        this.validatorService = validatorService;
     }
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = (User) request.getSession().getAttribute("user");
+            Customer user = (Customer) request.getSession().getAttribute("user");
             lotOfferService.createOffer(
-                    Integer.parseInt(request.getParameter("money")),
+                    Double.parseDouble(request.getParameter("money")),
                     Long.parseLong((String) request.getSession().getAttribute("lotId")),
                     user.getId(),
                     request.getParameter("text")

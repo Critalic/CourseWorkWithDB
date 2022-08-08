@@ -7,12 +7,14 @@ import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotOfferDAO;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
+@Disabled
 public class LotOfferDAOTest {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
     DAO<LotOffer> lotOfferDAO = new LotOfferDAO(factory);
@@ -20,6 +22,7 @@ public class LotOfferDAOTest {
     DAO<Customer> customerDAO = new CustomerDAO(factory);
 
     @Test
+    @Disabled
     public void saveTest() {
         Customer customer = customerDAO.get(10L).get();
         Lot lot = lotDAO.get(4L).get();
@@ -31,12 +34,14 @@ public class LotOfferDAOTest {
     }
 
     @Test
+    @Disabled
     public void deleteTest() {
         LotOffer lotOffer = lotOfferDAO.get(3L).get();
         lotOfferDAO.delete(lotOffer);
     }
 
     @Test
+    @Disabled
     public void getTest() {
         List<LotOffer> lots = lotOfferDAO.getAll(new LotOffer().setSuggestedPrice(34.)
                 .setLot(new Lot().setId(4L)).setOfferer(new Customer().setId(10L)));
@@ -44,6 +49,7 @@ public class LotOfferDAOTest {
     }
 
     @Test
+    @Disabled
     public void testUpdate() {
         LotOffer lot = lotOfferDAO.get(2L).get();
         lot.setDescription("I want to buy your tea cups");

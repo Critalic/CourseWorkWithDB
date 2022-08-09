@@ -15,6 +15,6 @@ public class LastPairMatchValidator implements ConstraintValidator<LastPairMatch
 
     @Override
     public boolean isValid(Object[] passwords, ConstraintValidatorContext constraintValidatorContext) {
-        return passwords[passwords.length-1].equals(passwords[passwords.length-2]);
+        return passwords[passwords.length - 1].equals(passwords[passwords.length - 2]);
     }
 }

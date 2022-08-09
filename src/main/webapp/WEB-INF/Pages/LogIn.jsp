@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script type="text/javascript" src="../JS/EmptyFormValidator.js"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Log in</title>
 </head>
@@ -35,50 +36,6 @@
                                 <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">Log in</button>
                             </form>
                         </div>
-                        <script>
-                            var createAllErrors = function() {
-                                var form = $( this ),
-                                    errorList = $( "ul.errorMessages", form );
-
-                                var showAllErrorMessages = function() {
-                                    errorList.empty();
-
-                                    // Find all invalid fields within the form.
-                                    var invalidFields = form.find( ":invalid" ).each( function( index, node ) {
-
-                                        // Find the field's corresponding label
-                                        var label = $( "label[for=" + node.id + "] "),
-                                            // Opera incorrectly does not fill the validationMessage property.
-                                            message = node.validationMessage || 'Invalid value.';
-
-                                        errorList
-                                            .show()
-                                            .append( "<li><span>" + label.html() + "</span> " + message + "</li>" );
-                                    });
-                                };
-
-                                // Support Safari
-                                form.on( "submit", function( event ) {
-                                    if ( this.checkValidity && !this.checkValidity() ) {
-                                        $( this ).find( ":invalid" ).first().focus();
-                                        event.preventDefault();
-                                    }
-                                });
-
-                                $( "input[type=submit], button:not([type=button])", form )
-                                    .on( "click", showAllErrorMessages);
-
-                                $( "input", form ).on( "keypress", function( event ) {
-                                    var type = $( this ).attr( "type" );
-                                    if ( /date|email|month|number|search|tel|text|time|url|week/.test ( type )
-                                        && event.keyCode == 13 ) {
-                                        showAllErrorMessages();
-                                    }
-                                });
-                            };
-
-                            $( "form" ).each( createAllErrors );
-                        </script>
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ public class CustomerDAOTest {
     @Test
     @Disabled
     public void testRemove() {
-        Customer customer = customerDAO.get(14L).get();
+        Customer customer = customerDAO.getAll(new Customer().setEmail("vitalikkryvonosiuk@gmail.com")).get(0);
 
         customerDAO.delete(customer);
     }

@@ -38,7 +38,6 @@ public class LogInStrategy extends SomeStrat {
         } catch (NoSuchAlgorithmException e) {
             request.setAttribute("errorMessage", e.getLocalizedMessage());
             forwardError(request, response, "DefinedError");
-            return;
         }
         response.sendRedirect(request.getContextPath() + "/lots/");
     }

@@ -39,7 +39,8 @@ public class SignUpStrategy extends SomeStrat {
             request.setAttribute("errorMessage", e.getLocalizedMessage());
             forwardToJsp(request, response, "SignUp");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace(); //TODO direct to unknown error
+            request.setAttribute("errorMessage", e.getLocalizedMessage());
+            forwardError(request, response, "DefinedError");
         }
 
         forwardToJsp(request, response, "LogIn");

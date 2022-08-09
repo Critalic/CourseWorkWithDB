@@ -1,5 +1,6 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Services.LotService;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchLotStrategy extends SomeStrat{
+public class SearchLotStrategy extends SomeStrat {
+
     LotService lotService;
+
     public SearchLotStrategy(LotService lotService) {
         this.lotService = lotService;
     }
@@ -22,17 +25,12 @@ public class SearchLotStrategy extends SomeStrat{
     }
 
     @Override
-    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String input = request.getParameter("input");
-            input = input.toLowerCase(Locale.ROOT);
-            List<Lot> answer =  lotService.getLotsByName(input);
-            request.setAttribute("lotsFound", answer);
-        } catch (SQLException e) {
-            request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
-            return;
-        }
+    public void execPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        String input = request.getParameter("input").toLowerCase();
+        List<Lot> answer = lotService.getLotsByName(input);
+        request.setAttribute("lotsFound", answer);
+
         forwardToJsp(request, response, "SearchLot");
     }
 }

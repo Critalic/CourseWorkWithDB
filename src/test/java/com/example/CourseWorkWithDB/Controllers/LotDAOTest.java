@@ -1,17 +1,14 @@
 package com.example.CourseWorkWithDB.Controllers;
 
-import com.example.CourseWorkWithDB.DAO.JPA.Implementations.CustomerDAO;
 import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.DAO.JPA.Implementations.JpaDaoFactory;
-import com.example.CourseWorkWithDB.DAO.JPA.Implementations.LotDAO;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 @Disabled
 public class LotDAOTest {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("cleverCloud");
@@ -25,7 +22,7 @@ public class LotDAOTest {
         Lot lot = new Lot("BMW", 32000., false, customer).setDescription("BMW e39 M5");
         lotDAO.save(lot);
 
-        System.out.println(customerDAO.get(3L).get().getLots().get(0).getName());
+//        System.out.println(customerDAO.get(3L).get().getLots().get(0).getName());
     }
 
     @Test
@@ -56,7 +53,7 @@ public class LotDAOTest {
     @Disabled
     public void testUpdate() {
         Lot lot = lotDAO.get(4L).get();
-        lot.setActive(true);
+        lot.setStatus(true);
 
         lotDAO.update(lot);
     }

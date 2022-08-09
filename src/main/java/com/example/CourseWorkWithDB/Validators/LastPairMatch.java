@@ -11,7 +11,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = LastPairMatchValidator.class)
 public @interface LastPairMatch {
-    String message() default "Passwords don't match";
+
+    String message() default "Arguments don't match";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

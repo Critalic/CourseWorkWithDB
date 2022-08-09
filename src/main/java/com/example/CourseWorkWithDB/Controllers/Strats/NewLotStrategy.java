@@ -1,19 +1,22 @@
 package com.example.CourseWorkWithDB.Controllers.Strats;
 
+import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Validators.EmptyValidator;
+import com.example.CourseWorkWithDB.Services.ValidatorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
+import javax.validation.ConstraintViolationException;
 
 public class NewLotStrategy extends SomeStrat{
     private final LotService lotService;
+    private final ValidatorService validatorService;
 
-    public NewLotStrategy(LotService lotService) {
+    public NewLotStrategy(LotService lotService, ValidatorService validatorService) {
         this.lotService = lotService;
+        this.validatorService = validatorService;
     }
 
     @Override
@@ -24,16 +27,20 @@ public class NewLotStrategy extends SomeStrat{
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = (User) request.getSession().getAttribute("user");
-            String lotName = EmptyValidator.checkIfEmpty(request.getParameter("lotName"), "Lot's name");
-            String lotInfo = request.getParameter("lotInfo");
-            int price = Integer.parseInt(
-                    EmptyValidator.checkIfEmpty(request.getParameter("lotStartPrice"), "Start price"));
-            lotService.createNewLot(user.getId(), lotName, user.getLogin(), price);
-            request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
-        } catch (SQLException | LessThanZeroException | NullPointerException | IllegalArgumentException e) {
+            Double price = Double.parseDouble(request.getParameter("lotStartPrice"));
+            Customer user = (Customer) request.getSession().getAttribute("user");
+
+            Object[] values = {user.getId(), request.getParameter("lotName"),
+                request.getParameter("lotInfo"), price};
+            validatorService.validateMethod(lotService, "createNewLot",values);
+
+            lotService.createNewLot(user.getId(), request.getParameter("lotName"),
+                request.getParameter("lotInfo"), price);
+//            request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId())); TODO
+//             evaluate the need
+        } catch (ConstraintViolationException | IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
+            forwardError(request, response,"NewLot.jsp");
             return;
         }
 

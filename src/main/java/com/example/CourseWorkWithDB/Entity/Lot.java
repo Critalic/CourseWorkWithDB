@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Table(name = "lot")
 @Getter
@@ -62,7 +61,7 @@ public class Lot implements BasicEntity {
         return this;
     }
 
-    public Lot setActive(boolean active) {
+    public Lot setStatus(boolean active) {
         isActive = active;
         return this;
     }

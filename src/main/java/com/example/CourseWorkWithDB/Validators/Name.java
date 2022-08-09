@@ -12,15 +12,14 @@ import org.hibernate.validator.constraints.CompositionType;
 import org.hibernate.validator.constraints.ConstraintComposition;
 
 @ConstraintComposition(CompositionType.AND)
-@Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$",
-    message = "Invalid email format")
-@Size(min = 7, message = "Invalid email length")
+@Pattern(regexp = "^([^\\d])+$", message = "Name must not contain numbers")
+@Size(min = 2, message = "Name must be at least 2 characters long")
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
-public @interface Email {
+public @interface Name {
 
-    String message() default "Invalid email address";
+    String message() default "Invalid name format";
 
     Class<?>[] groups() default {};
 

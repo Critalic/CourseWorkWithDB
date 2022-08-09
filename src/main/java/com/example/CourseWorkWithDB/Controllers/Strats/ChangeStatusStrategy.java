@@ -17,18 +17,10 @@ public class ChangeStatusStrategy extends SomeStrat {
 
     @Override
     public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
             long lotId = (long) request.getSession().getAttribute("lotId");
-            Lot currentLot= lotService.getLotById(lotId);
-            User user = (User) request.getSession().getAttribute("user");
-            lotService.setLotStatus(lotId, !currentLot.isActive());
-            request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
-            request.getSession().setAttribute("lots", lotService.getLots());
-        } catch (SQLException e) {
-            request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
-            return;
-        }
+            lotService.changeStatus(lotId);
+//            request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
+//            request.getSession().setAttribute("lots", lotService.getLots()); //TODO evaluate the need
         forwardToJsp(request,response, "MainPage");
     }
 }

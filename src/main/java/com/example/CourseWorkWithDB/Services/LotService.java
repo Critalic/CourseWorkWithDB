@@ -5,14 +5,14 @@ import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
-import com.example.CourseWorkWithDB.Validators.EmptyValidator;
-import com.example.CourseWorkWithDB.Validators.NumberValidator;
 
+import com.example.CourseWorkWithDB.Exceptions.DataBaseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.validation.constraints.DecimalMin;
 
 public class LotService implements BusinessService {
     private final DAO<Lot> lotDAO;
@@ -36,7 +36,6 @@ public class LotService implements BusinessService {
     }
 
     public List<Lot> getLotsByName(String name) {
-        name = EmptyValidator.checkIfEmpty(name, "Name");
         return Stream.concat(lotDAO.getAll(new Lot().setName(name)).stream(),
                         lotDAO.getAll(new Lot().setDescription(name)).stream())
                 .collect(Collectors.toList());
@@ -46,8 +45,9 @@ public class LotService implements BusinessService {
         return lotDAO.get(id);
     }
 
-    public void setLotStatus(long lotId, boolean value) {
-        lotDAO.update(lotDAO.get(lotId).orElseThrow(() -> new RuntimeException("Failed to get lot")).setActive(value));
+    public void changeStatus(long lotId) {
+        Lot lot = lotDAO.get(lotId).orElseThrow(() -> new DataBaseException("Failed to get lot"));
+        lotDAO.update(lot.setStatus(!lot.getIsActive()));
     }
 
     public void deleteLot(long lotId) {
@@ -58,14 +58,9 @@ public class LotService implements BusinessService {
         return UUID.randomUUID().toString();
     }
 
-    public void createNewLot(long ownerID, String name, String description, double startPrice)
-            throws IllegalArgumentException, NullPointerException {
-        name = EmptyValidator.checkIfEmpty(name, "Name");
-        description = EmptyValidator.checkIfEmpty(description, "Description");
-        NumberValidator.moreThanZero(startPrice, "Start price");
-
+    public void createNewLot(long ownerID, String name, String description,
+                             @DecimalMin(value = "0.01", message = "Price must be at least 0.01 ") Double startPrice) {
         lotDAO.save(new Lot(name, startPrice, false, new Customer().setId(ownerID))
                 .setDescription(description));
     }
-
 }

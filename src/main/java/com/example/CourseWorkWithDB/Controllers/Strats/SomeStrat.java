@@ -17,11 +17,7 @@ public abstract class SomeStrat {
         request.getRequestDispatcher("/WEB-INF/Errors/" + jspName + ".jsp").forward(request, response);
     }
 
-    public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
-    }
-
-    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 }

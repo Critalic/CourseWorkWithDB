@@ -29,31 +29,28 @@ public class StrategySelector {
                 return new LogInStrategy(customerService, validatorService);
             case "/signUp":
                 return new SignUpStrategy(customerService, validatorService);
-//            case "/createLot":
-//                return new NewLotStrategy(lotService);
-//            case "/mainPage":
-//                return new MainPageStrategy(lotService);
-//            case "/viewLot":
-//                return new ViewLotStrategy(lotService);
-//            case "/editLot":
-//                return new LotEditingStrategy(lotService);
-//            case "/logOut":
-//                return new LogOutStrategy( lotService);
-//            case "/changeStatus":
-//                return new ChangeStatusStrategy(lotService);
-//            case "/searchLot":
-//                return new SearchLotStrategy(lotService);
-//            case "/deleteLot":
-//                return new DeleteLotStrategy(lotService);
-//            case "/makeOffer":
-//                return new MakeOfferStrategy(lotOfferService, lotService, validatorService);
-//            case "/makeOffer":
-//                return new MakeOfferWithoutStrategy(lotOfferService, lotService);
-//            case "/generateURL":
-//                return new URLGeneratorStrategy(lotService);
+            case "/createLot":
+                return new NewLotStrategy(lotService, validatorService);
+            case "/mainPage":
+                return new MainPageStrategy(lotService);
+            case "/viewLot":
+                return new ViewLotStrategy(lotService);
+            case "/editLot":
+                return new LotEditingStrategy(lotService, lotOfferService);
+            case "/logOut":
+                return new LogOutStrategy( lotService);
+            case "/changeStatus":
+                return new ChangeStatusStrategy(lotService);
+            case "/searchLot":
+                return new SearchLotStrategy(lotService);
+            case "/deleteLot":
+                return new DeleteLotStrategy(lotService);
+            case "/makeOffer":
+                return new MakeOfferStrategy(lotOfferService, lotService);
+            case "/generateURL":
+                return new URLGeneratorStrategy(lotService);
             default:
-//                return new ShowLotsStrategy(lotService);
-                return null;
+                return new ShowLotsStrategy(lotService);
         }
 
     }

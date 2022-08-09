@@ -1,17 +1,17 @@
 package com.example.CourseWorkWithDB.Exceptions;
 
-public class DataBaseException extends RuntimeException {
+public class DBException extends RuntimeException {
     private String message;
     private Throwable cause;
 
-    public DataBaseException() {
+    public DBException() {
     }
 
-    public DataBaseException(String message) {
+    public DBException(String message) {
         this.message = message;
     }
 
-    public DataBaseException(String message, Throwable cause) {
+    public DBException(String message, Throwable cause) {
         this.message = message;
         this.cause = cause;
     }

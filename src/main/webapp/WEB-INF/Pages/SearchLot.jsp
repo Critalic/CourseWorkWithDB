@@ -52,7 +52,7 @@
                                 <ul class="list-disc space-y-2">
                                     <li> Type in the lot's name or information about it
                                         <div class="mb-3 pt-0">
-                                            <input type="text" name="input"
+                                            <input required type="text" name="input"
                                                    class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
                                         </div>
                                     </li>
@@ -72,21 +72,20 @@
                                         <th class="border border-green-600 ...">Lot name</th>
                                         <th class="border border-green-600 ...">Info</th>
                                         <th class="border border-green-600 ...">Owner</th>
-                                        <th class="border border-green-600 ...">Number of bids</th>
                                         <th class="border border-green-600 ...">Last offered price
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:forEach var="lot" items="${lotsFound}">
-                                        <c:if test="${lot.isActive()}">
+                                        <c:if test="${lot.getIsActive()}">
                                             <tr>
                                                 <td class="border border-green-600 ..."><c:out
                                                         value="${lot.getName()}"/></td>
                                                 <td class="border border-green-600 ..."><c:out
                                                         value="${lot.getDescription()}"/></td>
                                                 <td class="border border-green-600 ..."><c:out
-                                                        value="${lot.getOwner()}"/></td>
+                                                        value="${lot.getCustomer().getName()}"/></td>
                                                     <%--                                            <td class="border border-green-600 ..."><c:out value="${lot.getOffersQuantity}"/></td>--%>
                                                 <td class="border border-green-600 ..."><c:out
                                                         value="${lot.getStartPrice()} $"/></td>
@@ -105,8 +104,6 @@
                                             <th class="border border-green-600 ...">Lot name</th>
                                             <th class="border border-green-600 ...">Info</th>
                                             <th class="border border-green-600 ...">Owner</th>
-                                            <th class="border border-green-600 ...">Number of bids
-                                            </th>
                                             <th class="border border-green-600 ...">Last offered
                                                 price
                                             </th>
@@ -116,14 +113,14 @@
                                         </thead>
                                         <tbody>
                                         <c:forEach var="lot" items="${lotsFound}">
-                                            <c:if test="${lot.isActive()}">
+                                            <c:if test="${lot.getIsActive()}">
                                                 <tr>
                                                     <td class="border border-green-600 ..."><c:out
                                                             value="${lot.getName()}"/></td>
                                                     <td class="border border-green-600 ..."><c:out
                                                             value="${lot.getDescription()}"/></td>
                                                     <td class="border border-green-600 ..."><c:out
-                                                            value="${lot.getOwner()}"/></td>
+                                                            value="${lot.getCustomer().getName()}"/></td>
                                                         <%--                                                <td class="border border-green-600 ..."><c:out value="${lot.getOffersQuantity}"/></td>--%>
                                                     <td class="border border-green-600 ..."><c:out
                                                             value="${lot.getStartPrice()} $"/></td>

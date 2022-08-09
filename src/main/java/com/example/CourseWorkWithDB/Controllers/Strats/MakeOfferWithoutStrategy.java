@@ -21,21 +21,21 @@ public class MakeOfferWithoutStrategy extends SomeStrat {
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Customer user = (Customer) request.getSession().getAttribute("user");
-            lotOfferService.createNewOfferWithoutDescription(
-                    Double.parseDouble(request.getParameter("money")),
-                    Long.parseLong((String) request.getSession().getAttribute("lotId")),
-                    user.getId()
-            );
-            request.getSession().setAttribute("lots", lotService.getLots());
-        } catch (SQLException | LessThanZeroException | LessThanGivenException e) {
-            request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
-            return;
-        }
-
-        forwardToJsp(request, response, "AllLots");
+//        try {
+//            Customer user = (Customer) request.getSession().getAttribute("user");
+//            lotOfferService.createNewOfferWithoutDescription(
+//                    Double.parseDouble(request.getParameter("money")),
+//                    Long.parseLong((String) request.getSession().getAttribute("lotId")),
+//                    user.getId()
+//            );
+//            request.getSession().setAttribute("lots", lotService.getLots());
+//        } catch (SQLException | LessThanZeroException | LessThanGivenException e) {
+//            request.setAttribute("errorMessage", e.getLocalizedMessage());
+//            forwardError(request, response,"DefinedError");
+//            return;
+//        }
+//
+//        forwardToJsp(request, response, "AllLots");
     }
 
     @Override

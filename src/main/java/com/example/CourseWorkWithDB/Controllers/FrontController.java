@@ -3,6 +3,8 @@ package com.example.CourseWorkWithDB.Controllers;
 
 import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.DAO.JPA.Implementations.JpaDaoFactory;
+import com.example.CourseWorkWithDB.Exceptions.DBException;
+import com.example.CourseWorkWithDB.Exceptions.DBUtilException;
 import com.example.CourseWorkWithDB.Services.CustomerService;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
@@ -47,13 +49,23 @@ public class FrontController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        strategySelector.getStrategy(getPath(request)).execGet(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        try {
+            strategySelector.getStrategy(getPath(request)).execGet(request, response);
+        } catch (DBException | DBUtilException  e) {
+            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        strategySelector.getStrategy(getPath(request)).execPost(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        try {
+            strategySelector.getStrategy(getPath(request)).execPost(request, response);
+        } catch (DBException | DBUtilException | NullPointerException e) {
+            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
+        }
     }
 
     @Override

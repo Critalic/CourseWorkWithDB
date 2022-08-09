@@ -5,7 +5,8 @@ import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
 
-import com.example.CourseWorkWithDB.Exceptions.DataBaseException;
+import com.example.CourseWorkWithDB.Exceptions.DBException;
+import com.example.CourseWorkWithDB.Exceptions.DBUtilException;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
@@ -28,7 +29,7 @@ public class Utils {
             field.setAccessible(true);
             return field.get(identifier);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e); //TODO add exception
+            throw new DBUtilException(e.getMessage(), e.getCause());
         }
     }
 
@@ -36,8 +37,8 @@ public class Utils {
         try {
             field.setAccessible(true);
             return clazz.cast(field.get(identifier));
-        } catch (IllegalAccessException | ClassCastException e) {
-            throw new RuntimeException(e); //TODO add exception
+        } catch (IllegalAccessException e) {
+            throw new DBUtilException(e.getMessage(), e.getCause());
         }
     }
 
@@ -56,7 +57,7 @@ public class Utils {
             return criteriaBuilder.equal(root.get(field.getName()), getEntityFieldId(field, identifier,
                 field.getType().asSubclass(BasicEntity.class)).getId());
         } else {
-            throw new DataBaseException("Unexpected parameter type");
+            throw new DBException("Unexpected parameter type");
         }
     }
 
@@ -67,7 +68,7 @@ public class Utils {
             entityManager.getTransaction().commit();
         } catch (RuntimeException e) {
             entityManager.getTransaction().rollback();
-            throw new DataBaseException(e.getMessage(), e.getCause());
+            throw new DBException(e.getMessage(), e.getCause());
         } finally {
             entityManager.close();
         }

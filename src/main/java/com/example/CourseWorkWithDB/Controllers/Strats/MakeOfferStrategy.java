@@ -12,31 +12,31 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class MakeOfferStrategy extends SomeStrat {
+
     private final LotOfferService lotOfferService;
     private final LotService lotService;
-    private final ValidatorService validatorService;
 
-    public MakeOfferStrategy(LotOfferService lotOfferService, LotService lotService, ValidatorService validatorService) {
+    public MakeOfferStrategy(LotOfferService lotOfferService, LotService lotService) {
         this.lotOfferService = lotOfferService;
         this.lotService = lotService;
-        this.validatorService = validatorService;
     }
 
     @Override
-    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
         try {
             Customer user = (Customer) request.getSession().getAttribute("user");
             lotOfferService.createOffer(
-                    Double.parseDouble(request.getParameter("money")),
-                    Long.parseLong((String) request.getSession().getAttribute("lotId")),
-                    user.getId(),
-                    request.getParameter("text")
+                Double.parseDouble(request.getParameter("money")),
+                Long.parseLong((String) request.getSession().getAttribute("lotId")),
+                user.getId(),
+                request.getParameter("text")
             );
-            request.getSession().setAttribute("lots", lotService.getLots());  //TODO analyze this
-        } catch (SQLException | LessThanZeroException | LessThanGivenException | IllegalArgumentException | NullPointerException e) {
-            request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
-            return;        }
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            forwardToJsp(request, response, "NewOffer");
+        }
+        request.setAttribute("lots", lotService.getLots());
         forwardToJsp(request, response, "AllLots");
     }
 

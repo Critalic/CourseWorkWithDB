@@ -16,14 +16,9 @@ public class LogOutStrategy extends SomeStrat{
 
     @Override
     public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
             request.getSession().setAttribute("user", null);
-            request.getSession().setAttribute("lots", lotService.getLots());
-        } catch (SQLException e) {
-            request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"DefinedError");
-            return;
-        }
+//            request.getSession().setAttribute("lots", lotService.getLots());
+
         forwardToJsp(request, response, "AllLots");
     }
 }

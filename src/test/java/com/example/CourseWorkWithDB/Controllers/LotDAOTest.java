@@ -52,7 +52,7 @@ public class LotDAOTest {
     @Test
     @Disabled
     public void testUpdate() {
-        Lot lot = lotDAO.get(4L).get();
+        Lot lot = new Lot().setId(6L).setName("Mercedes").setCustomer(new Customer().setId(16L)).setStartPrice(50.);
         lot.setStatus(true);
 
         lotDAO.update(lot);

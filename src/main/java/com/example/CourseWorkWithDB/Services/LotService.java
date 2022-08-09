@@ -6,7 +6,7 @@ import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
 
-import com.example.CourseWorkWithDB.Exceptions.DataBaseException;
+import com.example.CourseWorkWithDB.Exceptions.DBException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,22 +31,18 @@ public class LotService implements BusinessService {
         return lotDAO.getAll(new Lot().setCustomer(new Customer().setId(ownerID)));
     }
 
-    public List<LotOffer> getOffers(long lotId) {
-        return lotOfferDAO.getAll(new LotOffer().setLot(new Lot().setId(lotId)));
-    }
-
     public List<Lot> getLotsByName(String name) {
         return Stream.concat(lotDAO.getAll(new Lot().setName(name)).stream(),
                         lotDAO.getAll(new Lot().setDescription(name)).stream())
                 .collect(Collectors.toList());
     }
 
-    public Optional<Lot> getLotById(long id) {
-        return lotDAO.get(id);
+    public Lot getLotById(long id) {
+        return lotDAO.get(id).orElseThrow(() -> new DBException("Failed to get lot"));
     }
 
     public void changeStatus(long lotId) {
-        Lot lot = lotDAO.get(lotId).orElseThrow(() -> new DataBaseException("Failed to get lot"));
+        Lot lot = lotDAO.get(lotId).orElseThrow(() -> new DBException("Failed to get lot"));
         lotDAO.update(lot.setStatus(!lot.getIsActive()));
     }
 
@@ -58,7 +54,7 @@ public class LotService implements BusinessService {
         return UUID.randomUUID().toString();
     }
 
-    public void createNewLot(long ownerID, String name, String description,
+    public void createNewLot(Long ownerID, String name, String description,
                              @DecimalMin(value = "0.01", message = "Price must be at least 0.01 ") Double startPrice) {
         lotDAO.save(new Lot(name, startPrice, false, new Customer().setId(ownerID))
                 .setDescription(description));

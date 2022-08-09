@@ -32,15 +32,15 @@ public class NewLotStrategy extends SomeStrat{
 
             Object[] values = {user.getId(), request.getParameter("lotName"),
                 request.getParameter("lotInfo"), price};
-            validatorService.validateMethod(lotService, "createNewLot",values);
+            validatorService.validateMethod(lotService, "createNewLot", values);
 
             lotService.createNewLot(user.getId(), request.getParameter("lotName"),
                 request.getParameter("lotInfo"), price);
-//            request.getSession().setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId())); TODO
-//             evaluate the need
+
+            request.setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
         } catch (ConstraintViolationException | IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getLocalizedMessage());
-            forwardError(request, response,"NewLot.jsp");
+            forwardToJsp(request, response,"NewLot");
             return;
         }
 

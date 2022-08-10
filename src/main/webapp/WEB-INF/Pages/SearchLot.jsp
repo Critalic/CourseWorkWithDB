@@ -78,7 +78,6 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="lot" items="${lotsFound}">
-                                        <c:if test="${lot.getIsActive()}">
                                             <tr>
                                                 <td class="border border-green-600 ..."><c:out
                                                         value="${lot.getName()}"/></td>
@@ -90,7 +89,6 @@
                                                 <td class="border border-green-600 ..."><c:out
                                                         value="${lot.getStartPrice()} $"/></td>
                                             </tr>
-                                        </c:if>
                                     </c:forEach>
                                     </tbody>
                                 </table>
@@ -113,7 +111,6 @@
                                         </thead>
                                         <tbody>
                                         <c:forEach var="lot" items="${lotsFound}">
-                                            <c:if test="${lot.getIsActive()}">
                                                 <tr>
                                                     <td class="border border-green-600 ..."><c:out
                                                             value="${lot.getName()}"/></td>
@@ -129,7 +126,6 @@
                                                                name="lotID" value="${lot.getId()}"/>
                                                     </td>
                                                 </tr>
-                                            </c:if>
                                         </c:forEach>
                                         </tbody>
                                     </table>

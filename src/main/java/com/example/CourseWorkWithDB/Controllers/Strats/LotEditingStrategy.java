@@ -22,21 +22,13 @@ public class LotEditingStrategy extends SomeStrat {
 
     @Override
     public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (Objects.isNull(request.getParameter("lotID"))) {
-            Customer user = (Customer) request.getSession().getAttribute("user");
-
-            request.setAttribute("errorMessage", "Please select a lot");
-            request.setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
-            forwardToJsp(request, response, "MainPage");
-        }
-
         long lotId = Long.parseLong(request.getParameter("lotID"));
         Lot lot = lotService.getLotById(lotId);
 
         request.setAttribute("lot", lot);
         request.setAttribute("lotOffers", lotOfferService.getOffersForLot(lotId));
 
-        request.getSession().setAttribute("lotId", lotId);
+        request.setAttribute("lotId", lotId);
         forwardToJsp(request, response, "LotEditor");
     }
 

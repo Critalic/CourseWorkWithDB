@@ -16,9 +16,9 @@ public class DeleteLotStrategy extends SomeStrat {
     }
 
     @Override
-    public void execGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void execPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Customer user = (Customer) request.getSession().getAttribute("user");
-        long lotId = (long) request.getSession().getAttribute("lotId");
+        long lotId = Long.parseLong(request.getParameter("lotId"));
         lotService.deleteLot(lotId);
         request.setAttribute("ownersLots", lotService.getLotsWithOwner(user.getId()));
         forwardToJsp(request, response, "MainPage");

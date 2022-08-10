@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script type="text/javascript" src="../JS/EmptyFormValidator.js"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Available lots</title>
 </head>
@@ -88,7 +89,7 @@
                                         <td class="border border-green-600 ..."><c:out
                                                 value="${lot.getStartPrice()} $"/></td>
                                         <td class="border border-green-600 ...">
-                                            <input type="radio" id="myCheckbox" name="lotID"
+                                            <input required type="radio" id="myCheckbox" name="lotID"
                                                    value="${lot.getId()}"/>
                                         </td>
                                     </tr>

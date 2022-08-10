@@ -45,19 +45,19 @@
                         <c:if test="${lotOffers.size()==0}"><p class="test-base">No bids
                             yet</p></c:if>
                         <ul class="list-disc space-y-2">
-                            <form action="${pageContext.request.contextPath}/lots/deleteLot"
-                                  method="get">
+                            <form action="${pageContext.request.contextPath}/lots/deleteLot?lotId=${lotId}"
+                                  method="post">
                                 <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
                                         type="submit">Delete this lot
                                 </button>
                             </form>
-                            <form action="${pageContext.request.contextPath}/lots/changeStatus"
-                                  method="get">
+                            <form action="${pageContext.request.contextPath}/lots/changeStatus?lotId=${lotId}"
+                                  method="post">
                                 <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
                                         type="submit">Change status
                                 </button>
                             </form>
-                            <form action="${pageContext.request.contextPath}/lots/generateURLForLot"
+                            <form action="${pageContext.request.contextPath}/lots/generateURLForLot?lotId=${lotId}"
                                   method="get">
                                 <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
                                         type="submit">Generate URL

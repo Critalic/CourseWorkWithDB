@@ -3,15 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script type="text/javascript" src="../JS/EmptyFormValidator.js"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Main</title>
 </head>
 <body>
-<c:if test="${errorMessage != null}">
-    <script>
-      alert("${errorMessage}")
-    </script>
-</c:if>
 <div class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 ...">
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
         <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
@@ -43,7 +39,7 @@
                                     <td class="border border-green-600 ..."><c:out
                                             value="${lot.getIsActive()}"/></td>
                                     <td class="border border-green-600 ...">
-                                        <input type="radio" id="myCheckbox" name="lotID"
+                                        <input required type="radio" id="myCheckbox" name="lotID"
                                                value="${lot.getId()}"/>
                                     </td>
                                 </tr>

@@ -4,36 +4,36 @@ import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
-import com.example.CourseWorkWithDB.Entity.LotOffer;
-
 import com.example.CourseWorkWithDB.Exceptions.DBException;
+
+import javax.validation.constraints.DecimalMin;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javax.validation.constraints.DecimalMin;
 
 public class LotService implements BusinessService {
     private final DAO<Lot> lotDAO;
-    private final DAO<LotOffer> lotOfferDAO;
 
     public LotService(DAOFactory daoFactory) {
         this.lotDAO = daoFactory.getDAO(Lot.class);
-        this.lotOfferDAO = daoFactory.getDAO(LotOffer.class);
     }
 
-    public List<Lot> getLots() { //TODO pagination
-        return lotDAO.getAll();
+    public List<Lot> getActiveLots(int pageNumber, int sizeLimit) {
+        return lotDAO.getAll(new Lot().setStatus(true), pageNumber, sizeLimit);
+    }
+
+    public Integer getSumOfRecords() {
+        return lotDAO.getAll(new Lot().setStatus(true)).size();
     }
 
     public List<Lot> getLotsWithOwner(long ownerID) {
         return lotDAO.getAll(new Lot().setCustomer(new Customer().setId(ownerID)));
     }
 
-    public List<Lot> getLotsByName(String name) {
-        return Stream.concat(lotDAO.getAll(new Lot().setName(name)).stream(),
-                        lotDAO.getAll(new Lot().setDescription(name)).stream())
+    public List<Lot> getActiveLotsByName(String name) {
+        return Stream.concat(lotDAO.getAll(new Lot().setName(name).setStatus(true)).stream(),
+                        lotDAO.getAll(new Lot().setDescription(name).setStatus(true)).stream())
                 .collect(Collectors.toList());
     }
 

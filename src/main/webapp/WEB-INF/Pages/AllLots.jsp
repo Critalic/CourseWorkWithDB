@@ -47,6 +47,44 @@
                                 type="submit">Search lot
                         </button>
                     </form>
+
+                    <nav aria-label="Navigation for countries">
+                        <ul class="pagination">
+                            <c:if test="${pageNumber != 1}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="<c:url
+                                                             value="/lots/allLots?pageNumber=${pageNumber-1}"/>
+                                                             ">Previous</a>
+                                </li>
+                            </c:if>
+
+                            <c:forEach begin="1" end="${numberOfPages}" var="i">
+                                <c:choose>
+                                    <c:when test="${pageNumber eq i}">
+                                        <li class="page-item active"><a class="page-link">
+                                                ${i} <span class="sr-only">(current)</span></a>
+                                        </li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="<c:url
+                                                             value="/lots/allLots?pageNumber=${i}"/>
+                                                             ">${i}</a>
+                                        </li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+
+                            <c:if test="${pageNumber lt numberOfPages}">
+                                <li class="page-item"><a class="page-link"
+                                                         href="<c:url
+                                                             value="/lots/allLots?pageNumber=${pageNumber+1}"/>
+                                                             ">Next</a>
+                                </li>
+                            </c:if>
+                        </ul>
+                    </nav>
+
                     <a href="<c:url value="/index.jsp"/>" class="text-cyan-600 hover:text-cyan-700">
                         &larr; Back to main</a>
                 </div>

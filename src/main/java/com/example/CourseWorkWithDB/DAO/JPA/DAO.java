@@ -9,7 +9,11 @@ public interface DAO<T> {
 
     List<T> getAll(T identifier);
 
-    List<T> getAll();
+    List<T> getAll(T identifier, int pageNumber, int sizeLimit);
+
+    List<T> getAll(int pageNumber, int sizeLimit);
+
+    Long getSumOfRecords();
 
     void save(T object);
 

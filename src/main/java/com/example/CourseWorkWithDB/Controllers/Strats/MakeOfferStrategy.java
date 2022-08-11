@@ -3,13 +3,11 @@ package com.example.CourseWorkWithDB.Controllers.Strats;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
-import com.example.CourseWorkWithDB.Services.ValidatorService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class MakeOfferStrategy extends SomeStrat {
 
@@ -23,20 +21,22 @@ public class MakeOfferStrategy extends SomeStrat {
 
     @Override
     public void execPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         try {
             Customer user = (Customer) request.getSession().getAttribute("user");
             lotOfferService.createOffer(
-                Double.parseDouble(request.getParameter("money")),
-                Long.parseLong((String) request.getSession().getAttribute("lotId")),
-                user.getId(),
-                request.getParameter("text")
+                    Double.parseDouble(request.getParameter("money")),
+                    Long.parseLong((String) request.getSession().getAttribute("lotId")),
+                    user.getId(),
+                    request.getParameter("text")
             );
         } catch (IllegalArgumentException e) {
             request.setAttribute("errorMessage", e.getMessage());
             forwardToJsp(request, response, "NewOffer");
         }
-        request.setAttribute("lots", lotService.getLots());
+        request.setAttribute("lots", lotService.getActiveLots(1, sizeLimit));
+        request.setAttribute("pageNumber", 1);
+        request.setAttribute("numberOfPages", getPageCount(lotService.getSumOfRecords()));
         forwardToJsp(request, response, "AllLots");
     }
 

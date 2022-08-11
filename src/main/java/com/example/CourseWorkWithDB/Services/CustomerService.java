@@ -5,10 +5,8 @@ import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Validators.Email;
 import com.example.CourseWorkWithDB.Validators.LastPairMatch;
-
 import com.example.CourseWorkWithDB.Validators.Name;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
 import javax.validation.constraints.Size;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -56,5 +54,9 @@ public class CustomerService implements BusinessService {
         }
 
         return sb.toString();
+    }
+
+    public Integer getSumOfRecords() {
+        return 2;
     }
 }

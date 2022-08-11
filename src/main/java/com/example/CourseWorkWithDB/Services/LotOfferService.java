@@ -6,10 +6,7 @@ import com.example.CourseWorkWithDB.Entity.Customer;
 import com.example.CourseWorkWithDB.Entity.Lot;
 import com.example.CourseWorkWithDB.Entity.LotOffer;
 import com.example.CourseWorkWithDB.Exceptions.DBException;
-import com.example.CourseWorkWithDB.Validators.EmptyValidator;
-import com.example.CourseWorkWithDB.Validators.NumberValidator;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class LotOfferService implements BusinessService {
@@ -33,5 +30,9 @@ public class LotOfferService implements BusinessService {
 
     public List<LotOffer> getOffersForLot(long lotId) {
         return lotOfferDAO.getAll(new LotOffer().setLot(new Lot().setId(lotId)));
+    }
+
+    public Integer getSumOfRecords() {
+        return 2;
     }
 }

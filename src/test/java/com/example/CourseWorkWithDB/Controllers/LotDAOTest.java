@@ -44,9 +44,9 @@ public class LotDAOTest {
     @Test
     @Disabled
     public void getAllTest() {
-        List<Lot> lots = lotDAO.getAll();
+//        List<Lot> lots = lotDAO.getAll();
 
-        System.out.println(lots);
+//        System.out.println(lots);
     }
 
     @Test

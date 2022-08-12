@@ -20,9 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "frontController", urlPatterns = "/lots/*")
 public class FrontController extends HttpServlet {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
     private StrategySelector strategySelector;
     private EntityManagerFactory factory;
     private ValidatorFactory validatorFactory;

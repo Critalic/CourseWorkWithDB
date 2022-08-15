@@ -8,9 +8,12 @@ import com.example.CourseWorkWithDB.Exceptions.DBUtilException;
 import com.example.CourseWorkWithDB.Services.CustomerService;
 import com.example.CourseWorkWithDB.Services.LotOfferService;
 import com.example.CourseWorkWithDB.Services.LotService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,13 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import java.io.IOException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "frontController", urlPatterns = "/lots/*")
 public class FrontController extends HttpServlet {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
     private StrategySelector strategySelector;
     private EntityManagerFactory factory;
     private ValidatorFactory validatorFactory;
@@ -54,22 +55,24 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-//        try {
+            throws ServletException, IOException {
+        try {
             strategySelector.getStrategy(getPath(request)).execGet(request, response);
-//        } catch (DBException | DBUtilException  e) {
-//            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
-//        }
+        } catch (DBException | DBUtilException | NullPointerException | PersistenceException e) {
+            LOGGER.error("Caught exception: {}", e.getCause().toString());
+            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-//        try {
+            throws ServletException, IOException {
+        try {
             strategySelector.getStrategy(getPath(request)).execPost(request, response);
-//        } catch (DBException | DBUtilException | NullPointerException e) {
-//            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
-//        }
+        } catch (DBException | DBUtilException | PersistenceException | NullPointerException e) {
+            LOGGER.error("Caught exception: {}", e.getCause().toString());
+            request.getRequestDispatcher("/WEB-INF/Errors/UndefinedError.html").forward(request, response);
+        }
     }
 
     @Override

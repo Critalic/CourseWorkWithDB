@@ -48,44 +48,45 @@
                         </button>
                     </form>
 
-                    <nav aria-label="Navigation for countries">
-                        <ul class="pagination">
+                    <nav aria-label="Navigation for lots">
+                        <ul class="inline-flex -space-x-px">
                             <c:if test="${pageNumber != 1}">
-                                <li class="page-item"><a class="page-link"
+                                <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                                          href="<c:url
-                                                             value="/lots/allLots?pageNumber=${pageNumber-1}"/>
-                                                             ">Previous</a>
+                                        value="/lots/allLots?pageNumber=${pageNumber-1}"/>
+                                ">Previous</a>
                                 </li>
                             </c:if>
 
                             <c:forEach begin="1" end="${numberOfPages}" var="i">
                                 <c:choose>
                                     <c:when test="${pageNumber eq i}">
-                                        <li class="page-item active"><a class="page-link">
+                                        <li class="page-item active">
+                                            <a aria-current="page" class="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
                                                 ${i} <span class="sr-only">(current)</span></a>
                                         </li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li class="page-item"><a class="page-link"
+                                        <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                                                  href="<c:url
-                                                             value="/lots/allLots?pageNumber=${i}"/>
-                                                             ">${i}</a>
+                                                value="/lots/allLots?pageNumber=${i}"/>
+                                        ">${i}</a>
                                         </li>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
 
                             <c:if test="${pageNumber lt numberOfPages}">
-                                <li class="page-item"><a class="page-link"
+                                <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                                          href="<c:url
-                                                             value="/lots/allLots?pageNumber=${pageNumber+1}"/>
-                                                             ">Next</a>
+                                        value="/lots/allLots?pageNumber=${pageNumber+1}"/>
+                                ">Next</a>
                                 </li>
                             </c:if>
                         </ul>
                     </nav>
 
-                    <a href="<c:url value="/index.jsp"/>" class="text-cyan-600 hover:text-cyan-700">
+                    <br><a href="<c:url value="/index.jsp"/>" class="text-cyan-600 hover:text-cyan-700">
                         &larr; Back to main</a>
                 </div>
             </div>
@@ -153,6 +154,42 @@
                             type="submit">Search lot
                     </button>
                 </form>
+                <nav aria-label="Navigation for lots">
+                    <ul class="inline-flex -space-x-px">
+                        <c:if test="${pageNumber != 1}">
+                            <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                href="<c:url
+                                        value="/lots/allLots?pageNumber=${pageNumber-1}"/>
+                                ">Previous</a>
+                            </li>
+                        </c:if>
+
+                        <c:forEach begin="1" end="${numberOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${pageNumber eq i}">
+                                    <li class="page-item active"><a class="page-link">
+                                            ${i} <span class="sr-only">(current)</span></a>
+                                    </li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        href="<c:url
+                                                value="/lots/allLots?pageNumber=${i}"/>
+                                        ">${i}</a>
+                                    </li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
+                        <c:if test="${pageNumber lt numberOfPages}">
+                            <li class="page-item"><a class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                href="<c:url
+                                        value="/lots/allLots?pageNumber=${pageNumber+1}"/>
+                                ">Next</a>
+                            </li>
+                        </c:if>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
-package com.example.CourseWorkWithDB.Validators;
+package com.example.CourseWorkWithDB.Validators.annotations;
+
+import com.example.CourseWorkWithDB.Validators.classes.LastPairMatchValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,4 +1,4 @@
-package com.example.CourseWorkWithDB.Validators;
+package com.example.CourseWorkWithDB.Validators.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

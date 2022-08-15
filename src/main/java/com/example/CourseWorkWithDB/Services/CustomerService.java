@@ -3,9 +3,9 @@ package com.example.CourseWorkWithDB.Services;
 import com.example.CourseWorkWithDB.DAO.JPA.DAO;
 import com.example.CourseWorkWithDB.DAO.JPA.DAOFactory;
 import com.example.CourseWorkWithDB.Entity.Customer;
-import com.example.CourseWorkWithDB.Validators.Email;
-import com.example.CourseWorkWithDB.Validators.LastPairMatch;
-import com.example.CourseWorkWithDB.Validators.Name;
+import com.example.CourseWorkWithDB.Validators.annotations.Email;
+import com.example.CourseWorkWithDB.Validators.annotations.LastPairMatch;
+import com.example.CourseWorkWithDB.Validators.annotations.Name;
 
 import javax.validation.constraints.Size;
 import java.security.MessageDigest;

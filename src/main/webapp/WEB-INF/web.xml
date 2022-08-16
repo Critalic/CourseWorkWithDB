@@ -22,6 +22,6 @@
     </resource-env-ref>
 
 <!--    <listener>-->
-<!--        <listener-class>com.example.CourseWorkWithDB.Controllers.InitListener</listener-class>-->
+<!--        <listener-class>com.example.cw.controllers.InitListener</listener-class>-->
 <!--    </listener>-->
 </web-app>

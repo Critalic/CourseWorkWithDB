@@ -79,6 +79,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.9.Final</version>
         </dependency>
+
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
@@ -104,6 +105,7 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.9</version>
         </dependency>
+
     </dependencies>
 
     <build>

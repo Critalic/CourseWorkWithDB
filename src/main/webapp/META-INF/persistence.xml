@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+  <persistence-unit name="default">
+    <class>com.example.cw.model.LotOffer</class>
+    <class>com.example.cw.model.Lot</class>
+    <class>com.example.cw.model.Customer</class>
+    
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lottery"/>
+      <property name="javax.persistence.jdbc.user" value="example"/>
+      <property name="javax.persistence.jdbc.password" value="example"/>
+    </properties>
+  </persistence-unit>
+
+<!--&lt;!&ndash;&ndash;&gt;-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+  <persistence-unit name="cleverCloud">
+    <class>com.example.cw.model.LotOffer</class>
+    <class>com.example.cw.model.Lot</class>
+    <class>com.example.cw.model.Customer</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://bk6jzo8t4bs97dswqqhj-mysql.services.clever-cloud.com:3306/bk6jzo8t4bs97dswqqhj"/>
+      <property name="javax.persistence.jdbc.user" value="example"/>
+      <property name="javax.persistence.jdbc.password" value="example"/>
+    </properties>
+  </persistence-unit>
+</persistence>

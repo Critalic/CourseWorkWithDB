@@ -2,7 +2,7 @@
 This repository contains code for my software engineering class
 course work project. It's an auction website where users can search for lots
 and make bids on them, and lot owners can create, update and delete their lots. 
-Detailed requirements, use cases and class diagrams can be found [here][1].   
+Detailed requirements, use cases and class diagrams can be found [here](https://docs.google.com/document/d/1l7PJY_uS_KNs8tnArPabn-X4kCJ8Uwf0/edit?usp=sharing&ouid=101538184761084668100&rtpof=true&sd=true).   
 
 ## Technology stack
 
@@ -36,7 +36,5 @@ Java reflection mechanism was used to construct the database queries
 to preserve the application memory, sacrificing the response speed.
 ```
 
-
-[1]:(https://docs.google.com/document/d/1l7PJY_uS_KNs8tnArPabn-X4kCJ8Uwf0/edit?usp=sharing&ouid=101538184761084668100&rtpof=true&sd=true)
 [2]:(https://tailwindcss.com/)
 

@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script type="text/javascript" src="../JS/EmptyFormValidator.js"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>Main</title>
 </head>
@@ -15,59 +14,44 @@
             <div class="max-w-md mx-auto">
                 <form action="${pageContext.request.contextPath}/lots/editLot" method="get">
                     <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                        <p>
-                        <h1><b>Welcome!</p> <p>Your lots are displayed here</p></b></h1>
+                        <p><h1><b>Welcome!</p> <p>Your lots are displayed here</p></b></h1>
                         <table class="border-separate border border-green-800 ...">
                             <thead>
                             <tr>
                                 <th class="border border-green-600 ...">Lot name</th>
                                 <th class="border border-green-600 ...">Info</th>
-                                <th class="border border-green-600 ...">Last offered price</th>
+                                <th class="border border-green-600 ...">Number of bids</th>
+                                <th class="border border-green-600 ...">Last offered price </th>
                                 <th class="border border-green-600 ...">Is active</th>
                                 <th class="border border-green-600 ...">Edit</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="lot" items="${ownersLots}">
-                                <tr>
-                                    <td class="border border-green-600 ..."><c:out
-                                            value="${lot.getName()}"/></td>
-                                    <td class="border border-green-600 ..."><c:out
-                                            value="${lot.getDescription()}"/></td>
-                                    <td class="border border-green-600 ..."><c:out
-                                            value="${lot.getStartPrice()} $"/></td>
-                                    <td class="border border-green-600 ..."><c:out
-                                            value="${lot.getIsActive()}"/></td>
-                                    <td class="border border-green-600 ...">
-                                        <input required type="radio" id="myCheckbox" name="lotID"
-                                               value="${lot.getId()}"/>
-                                    </td>
-                                </tr>
+                            <c:forEach var="lot" items="${ownersLots}" >
+                                    <tr>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getName()}"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getDescription()}"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getOffersQuantity()}"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.getStartPrice()} $"/></td>
+                                        <td class="border border-green-600 ..."><c:out value="${lot.isActive()}"/></td>
+                                        <td class="border border-green-600 ...">
+                                            <input type="radio" id="myCheckbox" name="lotID" value="${lot.getId()}"/>
+                                        </td>
+                                    </tr>
                             </c:forEach>
                             </tbody>
-                        </table>
-                        <br/>
-                        <c:if test="${ownersLots.size()!=0}">
-                            <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
-                                    type="submit">View details
-                            </button>
-                        </c:if>
+                        </table><br/>
+                        <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">View details</button>
                     </div>
                 </form>
                 <form action="${pageContext.request.contextPath}/lots/viewAll" method="get">
-                    <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
-                            type="submit">View all lots
-                    </button>
+                    <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">View all lots</button>
                 </form>
                 <form action="${pageContext.request.contextPath}/lots/createLot" method="get">
-                    <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
-                            type="submit">Create a new lot
-                    </button>
+                    <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">Create a new lot</button>
                 </form>
                 <form action="${pageContext.request.contextPath}/lots/logOut" method="get">
-                    <button class="bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white "
-                            type="submit">Log out
-                    </button>
+                    <button class = "bg-blue-300 text-x1 font-semibold px-4 py-1 rounded hover:bg-blue-800 hover:text-white " type="submit">Log out</button>
                 </form>
             </div>
         </div>

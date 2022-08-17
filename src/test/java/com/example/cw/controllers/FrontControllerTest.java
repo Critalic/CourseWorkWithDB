@@ -1,6 +1,6 @@
 package com.example.cw.controllers;
 
-import com.example.cw.entity.Customer;
+import com.example.cw.model.Customer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

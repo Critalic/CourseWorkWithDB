@@ -1,4 +1,4 @@
-package com.example.cw.entity;
+package com.example.cw.model;
 
 import lombok.*;
 

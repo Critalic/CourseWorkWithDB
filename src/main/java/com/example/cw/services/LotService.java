@@ -1,9 +1,9 @@
 package com.example.cw.services;
 
-import com.example.cw.dao.jpa.DAO;
-import com.example.cw.dao.jpa.DAOFactory;
-import com.example.cw.entity.Customer;
-import com.example.cw.entity.Lot;
+import com.example.cw.dao.DAO;
+import com.example.cw.dao.DAOFactory;
+import com.example.cw.model.Customer;
+import com.example.cw.model.Lot;
 import com.example.cw.exceptions.DBException;
 
 import javax.validation.constraints.DecimalMin;

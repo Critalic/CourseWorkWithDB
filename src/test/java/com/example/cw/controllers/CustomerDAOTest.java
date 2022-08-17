@@ -1,8 +1,8 @@
 package com.example.cw.controllers;
 
-import com.example.cw.dao.jpa.DAO;
+import com.example.cw.dao.DAO;
 import com.example.cw.dao.jpa.implementations.JpaDaoFactory;
-import com.example.cw.entity.Customer;
+import com.example.cw.model.Customer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

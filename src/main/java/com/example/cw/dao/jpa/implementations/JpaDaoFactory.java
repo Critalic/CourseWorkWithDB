@@ -1,11 +1,9 @@
 package com.example.cw.dao.jpa.implementations;
 
-import static com.example.cw.dao.jpa.Utils.conductInTransaction;
-import static com.example.cw.dao.jpa.Utils.convertFieldsToPredicates;
-
-import com.example.cw.dao.jpa.DAO;
-import com.example.cw.dao.jpa.DAOFactory;
-import com.example.cw.entity.BasicEntity;
+import com.example.cw.dao.DAOFactory;
+import com.example.cw.dao.jpa.Utils;
+import com.example.cw.dao.DAO;
+import com.example.cw.model.BasicEntity;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManagerFactory;
@@ -47,19 +45,19 @@ public class JpaDaoFactory implements DAOFactory {
 
             @Override
             public void save(T object) {
-                conductInTransaction(entityManager -> entityManager.persist(object),
+                Utils.conductInTransaction(entityManager -> entityManager.persist(object),
                     entityManagerFactory.createEntityManager());
             }
 
             @Override
             public void delete(T object) {
-                conductInTransaction(entityManager -> entityManager.remove(entityManager.merge(object)),
+                Utils.conductInTransaction(entityManager -> entityManager.remove(entityManager.merge(object)),
                     entityManagerFactory.createEntityManager());
             }
 
             @Override
             public void update(T object) {
-                conductInTransaction(entityManager -> entityManager.merge(object),
+                Utils.conductInTransaction(entityManager -> entityManager.merge(object),
                     entityManagerFactory.createEntityManager());
             }
 
@@ -69,7 +67,7 @@ public class JpaDaoFactory implements DAOFactory {
                 CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
                 Root<T> customerRoot = criteriaQuery.from(type);
 
-                List<Predicate> searchCriteria = convertFieldsToPredicates(object, criteriaBuilder, customerRoot);
+                List<Predicate> searchCriteria = Utils.convertFieldsToPredicates(object, criteriaBuilder, customerRoot);
 
                 return criteriaQuery.select(customerRoot)
                     .where(criteriaBuilder.and(searchCriteria.toArray(new Predicate[0])));

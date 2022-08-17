@@ -1,9 +1,9 @@
 package com.example.cw.controllers;
 
-import com.example.cw.dao.jpa.DAO;
+import com.example.cw.dao.DAO;
 import com.example.cw.dao.jpa.implementations.JpaDaoFactory;
-import com.example.cw.entity.Customer;
-import com.example.cw.entity.Lot;
+import com.example.cw.model.Customer;
+import com.example.cw.model.Lot;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

@@ -1,9 +1,9 @@
 package com.example.cw.dao.jpa;
 
-import com.example.cw.entity.BasicEntity;
-import com.example.cw.entity.Customer;
-import com.example.cw.entity.Lot;
-import com.example.cw.entity.LotOffer;
+import com.example.cw.model.BasicEntity;
+import com.example.cw.model.Customer;
+import com.example.cw.model.Lot;
+import com.example.cw.model.LotOffer;
 
 import com.example.cw.exceptions.DBException;
 import com.example.cw.exceptions.DBUtilException;

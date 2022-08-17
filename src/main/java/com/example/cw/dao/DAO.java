@@ -1,4 +1,4 @@
-package com.example.cw.dao.jpa;
+package com.example.cw.dao;
 
 import java.util.List;
 import java.util.Optional;

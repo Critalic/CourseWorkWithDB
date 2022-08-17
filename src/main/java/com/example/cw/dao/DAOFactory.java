@@ -1,6 +1,6 @@
-package com.example.cw.dao.jpa;
+package com.example.cw.dao;
 
-import com.example.cw.entity.BasicEntity;
+import com.example.cw.model.BasicEntity;
 
 public interface DAOFactory {
     <T extends BasicEntity> DAO<T> getDAO(Class<T> type);

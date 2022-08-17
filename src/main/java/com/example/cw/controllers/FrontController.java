@@ -1,10 +1,8 @@
 package com.example.cw.controllers;
 
 
-import com.example.cw.dao.jpa.DAOFactory;
+import com.example.cw.dao.DAOFactory;
 import com.example.cw.dao.jpa.implementations.JpaDaoFactory;
-import com.example.cw.exceptions.DBException;
-import com.example.cw.exceptions.DBUtilException;
 import com.example.cw.services.CustomerService;
 import com.example.cw.services.LotOfferService;
 import com.example.cw.services.LotService;
@@ -13,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,6 @@
 package com.example.cw.controllers.Strats;
 
-import com.example.cw.entity.Lot;
+import com.example.cw.model.Lot;
 import com.example.cw.services.LotOfferService;
 import com.example.cw.services.LotService;
 import java.io.IOException;

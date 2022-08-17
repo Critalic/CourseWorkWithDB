@@ -1,8 +1,8 @@
 package com.example.cw.services;
 
-import com.example.cw.dao.jpa.DAO;
-import com.example.cw.dao.jpa.DAOFactory;
-import com.example.cw.entity.Customer;
+import com.example.cw.dao.DAO;
+import com.example.cw.dao.DAOFactory;
+import com.example.cw.model.Customer;
 import com.example.cw.validators.annotations.Email;
 import com.example.cw.validators.annotations.LastPairMatch;
 import com.example.cw.validators.annotations.Name;

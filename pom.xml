@@ -79,6 +79,33 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.9.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tersesystems.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.9</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -88,12 +115,20 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
         </plugins>
 
-<!--        <resources>-->
-<!--            <resource>-->
-<!--                <directory>F:\Real Intellij projects\CourseWorkWithDB\Java\src\main\webapp</directory>-->
-<!--            </resource>-->
-<!--        </resources>-->
+        <resources>
+            <resource>
+                <directory>F:\Real Intellij projects\CourseWorkWithDB\Java\src\main\webapp\</directory>
+            </resource>
+        </resources>
     </build>
 </project>

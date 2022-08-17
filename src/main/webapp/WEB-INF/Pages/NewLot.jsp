@@ -2,10 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script type="text/javascript" src="../JS/EmptyFormValidator.js"></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <title>New Lot</title>
 </head>
 <body>
+<c:if test="${errorMessage != null}">
+    <script>
+      alert("${errorMessage}")
+    </script>
+</c:if>
     <div class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 ...">
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
@@ -18,7 +24,7 @@
                                 <ul class="list-disc space-y-2">
                                     <li> What's the lot's name?
                                         <div class="mb-3 pt-0">
-                                            <input type="text" name = "lotName" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+                                            <input required type="text" name = "lotName" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
                                         </div>
                                     </li>
                                     <li> Some information about it
@@ -28,7 +34,7 @@
                                     </li>
                                     <li> Set the start price
                                         <div class="mb-3 pt-0">
-                                            <input type="number"  name = "lotStartPrice" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
+                                            <input required type="number"  name = "lotStartPrice" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full"/>
                                         </div>
                                     </li>
                                 </ul>
